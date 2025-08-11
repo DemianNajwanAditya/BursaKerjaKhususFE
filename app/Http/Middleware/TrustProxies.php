@@ -11,7 +11,7 @@ class TrustProxies extends Middleware
      * Daftar alamat IP proxy yang dipercaya.
      *
      * @var array|string|null
-     */
+     */ 
     protected $proxies = '*'; // Bisa juga array IP proxy, atau null
 
     /**
