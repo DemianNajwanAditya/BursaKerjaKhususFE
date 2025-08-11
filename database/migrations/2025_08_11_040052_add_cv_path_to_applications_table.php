@@ -9,19 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-        $table->string('cv_path')->nullable()->after('password');
+        Schema::table('applications', function (Blueprint $table) {
+            $table->string('cv_path')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('applications', function (Blueprint $table) {
             $table->dropColumn('cv_path');
         });
     }

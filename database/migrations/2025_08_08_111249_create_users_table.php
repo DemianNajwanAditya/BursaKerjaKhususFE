@@ -11,16 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // database/migrations/xxxx_create_users_table.php
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('role'); // admin_bkk, guru, staff, siswa, alumni
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->string('role')->default('student'); // admin, company, student, alumni, school
+            $table->foreignId('company_id')->nullable()->constrained()->nullOnDelete(); // bila user terkait company
+            $table->rememberToken();
             $table->timestamps();
         });
+
     }
 
     /**

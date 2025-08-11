@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -21,7 +23,22 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cv_path',
+        'role',
+        'company_id'
     ];
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+
+        public function applications(){
+        return $this->hasMany(Application::class);
+    }
+
+        public function isRole($role){
+        return $this->role === $role;
+    }
 
     /**
      * The attributes that should be hidden for serialization.

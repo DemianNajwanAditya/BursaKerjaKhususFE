@@ -9,12 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-        $table->string('cv_path')->nullable()->after('password');
+            $table->string('role')->default('company');
         });
     }
+
 
     /**
      * Reverse the migrations.
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('cv_path');
+            //
         });
     }
 };
