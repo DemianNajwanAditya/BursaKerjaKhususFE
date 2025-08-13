@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -28,15 +25,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'company_id'
     ];
 
-    public function company(){
-        return $this->belongsTo(Company::class);
-    }
+    public function company() { return $this->hasOne(Company::class); }
 
-        public function applications(){
-        return $this->hasMany(Application::class);
-    }
+    public function applications() { return $this->hasMany(Application::class); }
 
-        public function isRole($role){
+    public function isRole($role){
         return $this->role === $role;
     }
 

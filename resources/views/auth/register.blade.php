@@ -3,94 +3,66 @@
 @section('content')
 <style>
     body {
-        font-family: 'Segoe UI', sans-serif;
-        background-color: #f4f6f9;
-        color: #333;
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
     }
     .container {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 15px;
+        margin-top: 50px;
     }
     .card {
-        background: #fff;
+        border: none;
         border-radius: 10px;
-        padding: 25px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
     .card-header {
-        font-size: 20px;
-        font-weight: 600;
-        border-bottom: 1px solid #eee;
-        margin-bottom: 20px;
-        padding-bottom: 10px;
-        color: #222;
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 15px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .card-body {
+        padding: 30px;
+        background-color: white;
     }
     label {
-        font-weight: 500;
-        margin-bottom: 5px;
-        display: inline-block;
+        font-weight: bold;
+        color: #555;
     }
     .form-control {
-        width: 100%;
-        padding: 10px;
         border-radius: 6px;
+        padding: 10px;
         border: 1px solid #ccc;
-        font-size: 14px;
-        transition: 0.2s;
+        transition: 0.3s;
     }
     .form-control:focus {
-        outline: none;
         border-color: #007bff;
-        box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
+        box-shadow: 0 0 4px rgba(0,123,255,0.4);
     }
     .btn-primary {
-        background: #007bff;
-        color: #fff;
-        padding: 10px 18px;
-        border-radius: 6px;
+        background-color: #007bff;
         border: none;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.2s;
+        border-radius: 6px;
+        padding: 10px 15px;
+        font-weight: bold;
+        transition: 0.3s;
     }
     .btn-primary:hover {
-        background: #0056b3;
+        background-color: #0056b3;
     }
-    a {
+    .invalid-feedback {
+        color: red;
+        font-size: 14px;
+    }
+    p a {
         color: #007bff;
         text-decoration: none;
+        font-weight: bold;
     }
-    a:hover {
+    p a:hover {
         text-decoration: underline;
-    }
-    .text-md-end {
-        text-align: right;
-    }
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 15px;
-    }
-    .col-md-4 {
-        width: 33.3333%;
-        padding-right: 10px;
-    }
-    .col-md-6 {
-        width: 50%;
-    }
-    .offset-md-4 {
-        margin-left: 33.3333%;
-    }
-    @media(max-width:768px){
-        .col-md-4, .col-md-6, .offset-md-4 {
-            width: 100%;
-            margin-left: 0;
-            text-align: left;
-        }
-        .text-md-end {
-            text-align: left;
-        }
     }
 </style>
 
@@ -106,8 +78,11 @@
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" 
+                                    name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -118,8 +93,11 @@
 
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" 
+                                    name="email" value="{{ old('email') }}" required autocomplete="email">
+
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -130,8 +108,11 @@
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                                    name="password" required autocomplete="new-password">
+
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -142,8 +123,10 @@
 
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control" 
+                                    name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 

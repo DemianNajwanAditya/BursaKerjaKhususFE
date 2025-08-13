@@ -22,8 +22,24 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                // Jika sudah login, redirect ke route home/dashboard
-                return redirect('/home');
+                // Izinkan akses ke halaman register meskipun sudah login
+                if ($request->is('register')) {
+                    return $next($request);
+                }
+                
+                $user = Auth::user();
+                
+                // Redirect sesuai role user yang login untuk halaman lain
+                switch ($user->role) {
+                    case 'student':
+                        return redirect('/dashboard');
+                    case 'company':
+                        return redirect('/company');
+                    case 'admin':
+                        return redirect('/admin');
+                    default:
+                        return redirect('/dashboard');
+                }
             }
         }
 

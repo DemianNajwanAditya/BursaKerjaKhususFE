@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
     /**
-     * Tampilkan form register.
+     * Show the registration form.
+     *
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -21,39 +19,26 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * Proses register user baru.
+     * Handle an incoming registration request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'in:student,alumni,company,admin'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|confirmed|min:8',
         ]);
 
-        // Simpan data user ke database
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => $request->role,
+            'role' => 'student',
         ]);
 
-        // Event untuk kirim email verifikasi
-        event(new Registered($user));
-
-        // Login otomatis setelah daftar
-        Auth::login($user);
-
-        // Redirect ke halaman sesuai role (opsional)
-        if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'company') {
-            return redirect()->route('company.dashboard');
-        } else {
-            return redirect()->route('dashboard');
-        }
+        return redirect()->route('login')->with('success', 'Pendaftaran berhasil, silakan login');
     }
 }

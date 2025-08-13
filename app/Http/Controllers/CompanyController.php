@@ -75,4 +75,11 @@ class CompanyController extends Controller
 
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
+
+    public function verify(Company $company) {
+    $company->is_verified = true;
+    $company->save();
+    // optionally send email to company user
+    return back()->with('success','Company verified');
+}
 }

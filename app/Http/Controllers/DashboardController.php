@@ -3,13 +3,64 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\JobPost;
+use App\Models\Application;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
+        $filter = $request->get('filter', 'all_time');
         
-        return view('dashboard', compact('user'));
+        // Base queries
+        $jobPostsQuery = JobPost::query();
+        $applicationsQuery = Application::query();
+        
+        // Apply role-based filtering
+        if ($user->role === 'company') {
+            $companyId = $user->company->id;
+            $jobPostsQuery->where('company_id', $companyId);
+            $applicationsQuery->whereHas('jobPost', function($query) use ($companyId) {
+                $query->where('company_id', $companyId);
+            });
+        }
+        
+        // Apply time filters
+        $this->applyTimeFilter($jobPostsQuery, $filter);
+        $this->applyTimeFilter($applicationsQuery, $filter, 'created_at');
+        
+        // Calculate statistics
+        $statistics = [
+            'active_jobs' => (clone $jobPostsQuery)->where('status', 'active')->count(),
+            'closed_jobs' => (clone $jobPostsQuery)->where('status', 'closed')->count(),
+            'total_applicants' => (clone $applicationsQuery)->count(),
+            'accepted_applicants' => (clone $applicationsQuery)->where('status', 'accepted')->count(),
+            'rejected_applicants' => (clone $applicationsQuery)->where('status', 'rejected')->count(),
+            'pending_applicants' => (clone $applicationsQuery)->where('status', 'pending')->count(),
+        ];
+        
+        return view('dashboard', compact('user', 'statistics', 'filter'));
+    }
+    
+    private function applyTimeFilter($query, $filter, $column = 'created_at')
+    {
+        switch ($filter) {
+            case 'today':
+                $query->whereDate($column, today());
+                break;
+            case 'this_week':
+                $query->whereBetween($column, [now()->startOfWeek(), now()->endOfWeek()]);
+                break;
+            case 'this_month':
+                $query->whereMonth($column, now()->month)
+                      ->whereYear($column, now()->year);
+                break;
+            case 'all_time':
+            default:
+                // No filter applied
+                break;
+        }
     }
 }

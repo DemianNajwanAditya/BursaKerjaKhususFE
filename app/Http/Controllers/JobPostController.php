@@ -1,0 +1,102 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\JobPost;
+
+class JobPostController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $jobs = JobPost::with('company')->latest()->get();
+        return view('jobs.index', compact('jobs'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('company.jobs.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'requirements' => 'nullable|string',
+            'salary' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'type' => 'nullable|string|in:full-time,part-time,contract,internship',
+            'deadline' => 'nullable|date|after:today',
+        ]);
+
+        $company = auth()->user()->company;
+        $company->jobPosts()->create($request->all());
+
+        return redirect()->route('company.dashboard')
+            ->with('success', 'Job created successfully.');
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(JobPost $job)
+    {
+        $job->load('company');
+        return view('jobs.show', compact('job'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(JobPost $job)
+    {
+        $this->authorize('update', $job);
+        return view('company.jobs.edit', compact('job'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, JobPost $job)
+    {
+        $this->authorize('update', $job);
+        
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'requirements' => 'nullable|string',
+            'salary' => 'nullable|string',
+            'location' => 'nullable|string|max:255',
+            'type' => 'nullable|string|in:full-time,part-time,contract,internship',
+            'deadline' => 'nullable|date|after:today',
+        ]);
+
+        $job->update($request->all());
+
+        return redirect()->route('company.dashboard')
+            ->with('success', 'Job updated successfully.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(JobPost $job)
+    {
+        $this->authorize('delete', $job);
+        
+        $job->delete();
+
+        return redirect()->route('company.dashboard')
+            ->with('success', 'Job deleted successfully.');
+    }
+}
