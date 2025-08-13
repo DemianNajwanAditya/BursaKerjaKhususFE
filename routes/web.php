@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobPostController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\NotifikasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +98,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/upload-cv', [ProfileController::class, 'uploadCv'])
         ->name('profile.upload-cv.store');
 });
+
+//status lamaran email
+Route::get('/tes-notif', function () {
+    return view('emails.status-lamaran', [
+        'nama' => 'Evan Arya',
+        'posisi' => 'Web Developer',
+        'perusahaan' => 'PT Maju Jaya',
+        'tipe' => 'apply',
+        'url' => url('/dashboard')
+    ]);
+});
+
+Route::post('/kirim-notif', [NotifikasiController::class, 'kirim']);
+
