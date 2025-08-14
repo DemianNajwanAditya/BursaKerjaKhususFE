@@ -4,64 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title') - BKK OPAT</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        .sidebar {
-            width: 250px;
-            background-color: #0a63b3;
-            height: 100vh;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 20px;
-        }
-        .sidebar img.logo {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 10px;
-        }
-        .app-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .profile-pic {
-            width: 80px;
-            height: 80px;
-            background-color: #ccc;
-            border-radius: 50%;
-            margin-bottom: 30px;
-        }
-        .nav-menu {
-            list-style: none;
-            padding: 0;
-            width: 100%;
-        }
-        .nav-menu li {
-            width: 100%;
-        }
-        .nav-menu a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 20px;
-            color: white;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-        .nav-menu a:hover {
-            background-color: #084d8d;
-        }
-        .nav-menu i {
-            width: 20px;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     <div style="display: flex; min-height: 100vh;">
