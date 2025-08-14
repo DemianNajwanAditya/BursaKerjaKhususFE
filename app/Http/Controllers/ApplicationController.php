@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Application;
 use App\Models\JobPost;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Mail\StatusLamaranMail;
 
 class ApplicationController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of applications for the company
      */
     public function indexForCompany()
     {
-        $company = auth()->user()->company;
+        $company = Auth::user()->company;
+
         $applications = Application::whereHas('jobPost', function ($query) use ($company) {
             $query->where('company_id', $company->id);
         })->with(['user', 'jobPost'])->latest()->paginate(10);
@@ -31,7 +38,7 @@ class ApplicationController extends Controller
             'cover_letter' => 'nullable|string|max:2000',
         ]);
 
-        $user = auth()->user();
+        $user = Auth::user();
 
         // Prevent duplicate applications
         if (Application::where('user_id', $user->id)
@@ -44,7 +51,7 @@ class ApplicationController extends Controller
             ? $request->file('cv')->store('cvs', 'public')
             : $user->cv_path;
 
-        Application::create([
+        $application = Application::create([
             'user_id' => $user->id,
             'job_post_id' => $job->id,
             'cv_path' => $cvPath,
@@ -52,11 +59,20 @@ class ApplicationController extends Controller
             'status' => 'pending',
         ]);
 
-        return back()->with('success', 'Application submitted successfully.');
+        // Kirim email notifikasi Apply
+        Mail::to($user->email)->send(new StatusLamaranMail(
+            $user->name,
+            $job->title,
+            $job->company->name,
+            'apply',
+            route('applications.show', $application->id)
+        ));
+
+        return back()->with('success', 'Application submitted successfully & email sent.');
     }
 
     /**
-     * Update application status
+     * Update application status + send email
      */
     public function updateStatus(Request $request, Application $application)
     {
@@ -64,16 +80,26 @@ class ApplicationController extends Controller
             'status' => 'required|in:accepted,rejected',
         ]);
 
-        // Ensure the application belongs to a job post owned by the authenticated company
-        $company = auth()->user()->company;
+        // Pastikan hanya perusahaan pemilik job yang bisa update
+        $company = Auth::user()->company;
         if ($application->jobPost->company_id !== $company->id) {
             abort(403, 'Unauthorized action.');
         }
 
+        // Update status
         $application->update(['status' => $request->status]);
 
+        // Kirim email notifikasi status diterima/ditolak
+        Mail::to($application->user->email)->send(new StatusLamaranMail(
+            $application->user->name,
+            $application->jobPost->title,
+            $application->jobPost->company->name,
+            $application->status,
+            route('applications.show', $application->id)
+        ));
+
         return redirect()->route('company.applications.index')
-            ->with('success', 'Application status updated successfully.');
+            ->with('success', 'Application status updated successfully & email notification sent.');
     }
 
     /**
@@ -82,9 +108,23 @@ class ApplicationController extends Controller
     public function indexForJob(JobPost $job)
     {
         $this->authorize('view', $job);
-        
+
         $applications = $job->applications()->with('user')->latest()->get();
-        
+
         return view('company.job-applications', compact('applications', 'job'));
+    }
+
+    /**
+     * Show a specific application (for link in email)
+     */
+    public function show(Application $application)
+    {
+        // Cek hak akses: pelamar bisa lihat aplikasinya sendiri, perusahaan bisa lihat aplikasinya
+        if (Auth::id() !== $application->user_id &&
+            Auth::user()->company_id !== $application->jobPost->company_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        return view('applications.show', compact('application'));
     }
 }

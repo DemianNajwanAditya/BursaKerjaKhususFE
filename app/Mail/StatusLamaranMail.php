@@ -3,51 +3,31 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class StatusLamaranMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $applicantName;
+    public $jobTitle;
+    public $companyName;
+    public $status;
+    public $applicationLink;
+
+    public function __construct($applicantName, $jobTitle, $companyName, $status, $applicationLink)
     {
-        //
+        $this->applicantName = $applicantName;
+        $this->jobTitle = $jobTitle;
+        $this->companyName = $companyName;
+        $this->status = $status;
+        $this->applicationLink = $applicationLink;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Status Lamaran Mail',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
+        return $this->markdown('emails.status-lamaran')
+            ->subject('Status Lamaran Anda: ' . ucfirst($this->status));
     }
 }
