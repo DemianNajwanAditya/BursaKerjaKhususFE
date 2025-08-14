@@ -94,8 +94,9 @@
     <p>{{ $job->description }}</p>
 
     @auth
-        <form action="{{ route('jobs.apply', $job->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('applications.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="job_post_id" value="{{ $job->id }}">
             <label>Cover letter</label>
             <textarea name="cover_letter">{{ old('cover_letter') }}</textarea>
 

@@ -17,6 +17,20 @@ class JobPostController extends Controller
     }
 
     /**
+     * Display a listing of jobs for the authenticated company.
+     */
+    public function companyIndex()
+    {
+        $company = auth()->user()->company;
+        $jobs = JobPost::where('company_id', $company->id)
+                      ->with('company')
+                      ->latest()
+                      ->get();
+        
+        return view('company.jobs.index', compact('jobs'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -42,7 +56,7 @@ class JobPostController extends Controller
         $company = auth()->user()->company;
         $company->jobPosts()->create($request->all());
 
-        return redirect()->route('company.dashboard')
+        return redirect()->route('company.jobs.index')
             ->with('success', 'Job created successfully.');
     }
 
@@ -60,7 +74,10 @@ class JobPostController extends Controller
      */
     public function edit(JobPost $job)
     {
-        $this->authorize('update', $job);
+        // Ensure the job belongs to the authenticated company
+        if ($job->company_id !== auth()->user()->company->id) {
+            abort(403, 'Unauthorized action.');
+        }
         return view('company.jobs.edit', compact('job'));
     }
 
@@ -69,7 +86,10 @@ class JobPostController extends Controller
      */
     public function update(Request $request, JobPost $job)
     {
-        $this->authorize('update', $job);
+        // Ensure the job belongs to the authenticated company
+        if ($job->company_id !== auth()->user()->company->id) {
+            abort(403, 'Unauthorized action.');
+        }
         
         $request->validate([
             'title' => 'required|string|max:255',
@@ -83,7 +103,7 @@ class JobPostController extends Controller
 
         $job->update($request->all());
 
-        return redirect()->route('company.dashboard')
+        return redirect()->route('company.jobs.index')
             ->with('success', 'Job updated successfully.');
     }
 
@@ -92,11 +112,14 @@ class JobPostController extends Controller
      */
     public function destroy(JobPost $job)
     {
-        $this->authorize('delete', $job);
+        // Ensure the job belongs to the authenticated company
+        if ($job->company_id !== auth()->user()->company->id) {
+            abort(403, 'Unauthorized action.');
+        }
         
         $job->delete();
 
-        return redirect()->route('company.dashboard')
+        return redirect()->route('company.jobs.index')
             ->with('success', 'Job deleted successfully.');
     }
 }

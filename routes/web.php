@@ -1,113 +1,90 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JobPostController;
 use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\NotifikasiController;
-use App\Mail\StatusLamaranMail;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\AdminDashboardController;
 
-/*
-|--------------------------------------------------------------------------
-| Public Routes
-|--------------------------------------------------------------------------
-*/
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
-// Auth routes
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::post('/login', [HomeController::class, 'authenticate'])->name('authenticate');
+Route::post('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store']);
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 
-// Public job list
-Route::get('/jobs', [JobPostController::class, 'index'])->name('jobs.index');
-Route::get('/jobs/{job}', [JobPostController::class, 'show'])->name('jobs.show');
+Route::get('/statistics', [HomeController::class, 'statistics'])->name('statistics');
+Route::get('/achievements', [HomeController::class, 'achievements'])->name('achievements');
+Route::get('/info', [HomeController::class, 'info'])->name('info');
 
-/*
-|--------------------------------------------------------------------------
-| Authenticated Routes
-|--------------------------------------------------------------------------
-*/
+// Dashboard Routes
 Route::middleware(['auth'])->group(function () {
-
-    // Dashboard umum
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    
+    // New route for pending companies
+    Route::get('/admin/companies/pending', [AdminDashboardController::class, 'pendingCompanies'])->name('admin.companies.pending');
 
-    // 🔹 Tambahan: route untuk detail lamaran
-    Route::get('/applications/{application}', [ApplicationController::class, 'show'])
-        ->name('applications.show');
-
-    /*
-    |--------------------------------------------------------------------------
-    | Admin Routes
-    |--------------------------------------------------------------------------
-    */
-    Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
-        Route::view('/', 'admin.dashboard')->name('dashboard');
-        Route::view('/users', 'admin.users')->name('users');
+    // New route for managing users
+    Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin.users');
+    Route::get('/admin/users/create', [AdminDashboardController::class, 'createUser'])->name('admin.users.create');
+    Route::post('/admin/users', [AdminDashboardController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('/admin/users/{user}/edit', [AdminDashboardController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [AdminDashboardController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [AdminDashboardController::class, 'deleteUser'])->name('admin.users.delete');
+    
+    // Berita Routes
+    Route::prefix('berita')->group(function () {
+        Route::get('/', [BeritaController::class, 'index'])->name('berita.index');
+        Route::get('/create', [BeritaController::class, 'create'])->name('berita.create');
+        Route::post('/', [BeritaController::class, 'store'])->name('berita.store');
+        Route::get('/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Company Routes
-    |--------------------------------------------------------------------------
-    */
-    Route::middleware(['role:company'])->prefix('company')->name('company.')->group(function () {
-        Route::view('/', 'company.dashboard')->name('dashboard');
-
-        // Job management
-        Route::resource('jobs', JobPostController::class)->except(['index', 'show']);
-
-        // Application management
-        Route::get('/applications', [ApplicationController::class, 'indexForCompany'])->name('applications.index');
-        Route::put('/applications/{application}/status', [ApplicationController::class, 'updateStatus'])
-            ->name('applications.updateStatus');
+    
+    // Jurusan Routes
+    Route::prefix('jurusan')->group(function () {
+        Route::get('/', [JurusanController::class, 'index'])->name('jurusan.index');
+        Route::get('/{jurusan:slug}', [JurusanController::class, 'show'])->name('jurusan.show');
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Student Routes
-    |--------------------------------------------------------------------------
-    */
-    Route::middleware(['role:student'])->group(function () {
-        Route::post('/jobs/{job}/apply', [ApplicationController::class, 'store'])->name('jobs.apply');
+    
+    // Job Routes
+    Route::prefix('jobs')->group(function () {
+        Route::get('/', [JobPostController::class, 'index'])->name('jobs.index');
+        Route::get('/{job}', [JobPostController::class, 'show'])->name('jobs.show');
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Profile Management
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/profile/upload-cv', [ProfileController::class, 'showUploadForm'])->name('profile.upload-cv');
-    Route::post('/profile/upload-cv', [ProfileController::class, 'uploadCv'])->name('profile.upload-cv.store');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Notifikasi & Email Testing
-|--------------------------------------------------------------------------
-*/
-Route::post('/kirim-notifikasi', [NotifikasiController::class, 'kirim']);
-
-// Test kirim email manual
-Route::get('/test-email', function () {
-    $toEmail = 'aevan354@gmail.com'; // ganti sesuai email tujuan
-    Mail::to($toEmail)->send(new StatusLamaranMail(
-        'Budi',
-        'Programmer',
-        'PT Maju Jaya',
-        'apply', // apply / accepted / rejected
-        url('/dashboard')
-    ));
-
-    return "✅ Email test sudah dikirim ke $toEmail";
+    
+    // Application Routes
+    Route::prefix('applications')->group(function () {
+        Route::post('/', [ApplicationController::class, 'store'])->name('applications.store');
+        Route::get('/{application}', [ApplicationController::class, 'show'])->name('applications.show');
+    });
+    
+    // Company Routes
+    Route::prefix('company')->middleware('role:company')->group(function () {
+        Route::get('/jobs', [JobPostController::class, 'companyIndex'])->name('company.jobs.index');
+        Route::get('/jobs/create', [JobPostController::class, 'create'])->name('company.jobs.create');
+        Route::post('/jobs', [JobPostController::class, 'store'])->name('company.jobs.store');
+        Route::get('/jobs/{job}/edit', [JobPostController::class, 'edit'])->name('company.jobs.edit');
+        Route::put('/jobs/{job}', [JobPostController::class, 'update'])->name('company.jobs.update');
+        Route::delete('/jobs/{job}', [JobPostController::class, 'destroy'])->name('company.jobs.destroy');
+        Route::get('/applications', [ApplicationController::class, 'indexForCompany'])->name('company.applications.index');
+        Route::get('/applications/{application}/preview', [ApplicationController::class, 'previewPdf'])->name('company.applications.preview');
+        Route::get('/applications/{application}/download', [ApplicationController::class, 'downloadPdf'])->name('company.applications.download');
+        Route::put('/applications/{application}/status', [ApplicationController::class, 'updateStatus'])->name('company.applications.updateStatus');
+    });
+    
+    // Profile Routes
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'show'])->name('profile');
+        Route::get('/show', [ProfileController::class, 'show'])->name('profile.show');
+        Route::put('/', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/upload-cv', [ProfileController::class, 'showUploadForm'])->name('profile.upload-cv');
+        Route::post('/upload-cv', [ProfileController::class, 'uploadCv'])->name('profile.upload-cv.post');
+    });
 });

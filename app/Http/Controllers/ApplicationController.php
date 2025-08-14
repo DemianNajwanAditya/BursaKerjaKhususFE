@@ -17,6 +17,14 @@ class ApplicationController extends Controller
     /**
      * Display a listing of applications for the company
      */
+    public function index()
+    {
+        return $this->indexForCompany();
+    }
+
+    /**
+     * Display a listing of applications for the company
+     */
     public function indexForCompany()
     {
         $company = Auth::user()->company;
@@ -26,6 +34,50 @@ class ApplicationController extends Controller
         })->with(['user', 'jobPost'])->latest()->paginate(10);
 
         return view('company.applications', compact('applications'));
+    }
+
+    /**
+     * Preview PDF file
+     */
+    public function previewPdf(Application $application)
+    {
+        // Cek hak akses - company hanya bisa akses aplikasi untuk job mereka
+        $user = Auth::user();
+        $company = $user->company;
+        
+        if (!$company || $application->jobPost->company_id !== $company->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $filePath = storage_path('app/public/' . $application->cv_path);
+        
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found.');
+        }
+
+        return response()->file($filePath);
+    }
+
+    /**
+     * Download PDF file
+     */
+    public function downloadPdf(Application $application)
+    {
+        // Cek hak akses - company hanya bisa akses aplikasi untuk job mereka
+        $user = Auth::user();
+        $company = $user->company;
+        
+        if (!$company || $application->jobPost->company_id !== $company->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $filePath = storage_path('app/public/' . $application->cv_path);
+        
+        if (!file_exists($filePath)) {
+            abort(404, 'File not found.');
+        }
+
+        return response()->download($filePath, 'CV_' . $application->user->name . '.pdf');
     }
 
     /**
@@ -59,16 +111,25 @@ class ApplicationController extends Controller
             'status' => 'pending',
         ]);
 
-        // Kirim email notifikasi Apply
-        Mail::to($user->email)->send(new StatusLamaranMail(
-            $user->name,
-            $job->title,
-            $job->company->name,
-            'apply',
-            route('applications.show', $application->id)
-        ));
+        // Null safety checks for email notification
+        $companyName = $job->company ? $job->company->name : 'Unknown Company';
+        $jobTitle = $job->title ?? 'Unknown Position';
 
-        return back()->with('success', 'Application submitted successfully & email sent.');
+        // Kirim email notifikasi Apply
+        try {
+            Mail::to($user->email)->send(new StatusLamaranMail(
+                $user->name,
+                $jobTitle,
+                $companyName,
+                'apply',
+                route('applications.show', $application->id)
+            ));
+        } catch (\Exception $e) {
+            // Log error but don't break the application
+            \Log::error('Failed to send email notification: ' . $e->getMessage());
+        }
+
+        return back()->with('success', 'Application submitted successfully.');
     }
 
     /**

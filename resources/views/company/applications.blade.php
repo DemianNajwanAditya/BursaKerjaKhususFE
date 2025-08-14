@@ -159,24 +159,33 @@
                                 </span>
                             </td>
                             <td>
-                                <form action="{{ route('company.applications.updateStatus', $application) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('PUT')
+                                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                    <a href="{{ route('company.applications.preview', $application) }}" 
+                                       target="_blank" 
+                                       class="btn" 
+                                       style="color: #3b82f6; text-decoration: none;">
+                                        📄 Preview CV
+                                    </a>
+                                    
+                                    <form action="{{ route('company.applications.updateStatus', $application) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PUT')
 
-                                    @if($application->status != 'accepted')
-                                        <button type="submit" name="status" value="accepted" class="btn accept"
-                                            onclick="return confirm('Apakah Anda yakin ingin menerima lamaran ini?')">
-                                            ✔ Terima
-                                        </button>
-                                    @endif
+                                        @if($application->status != 'accepted')
+                                            <button type="submit" name="status" value="accepted" class="btn accept"
+                                                onclick="return confirm('Apakah Anda yakin ingin menerima lamaran ini?')">
+                                                ✔ Terima
+                                            </button>
+                                        @endif
 
-                                    @if($application->status != 'rejected')
-                                        <button type="submit" name="status" value="rejected" class="btn reject"
-                                            onclick="return confirm('Apakah Anda yakin ingin menolak lamaran ini?')">
-                                            ✖ Tolak
-                                        </button>
-                                    @endif
-                                </form>
+                                        @if($application->status != 'rejected')
+                                            <button type="submit" name="status" value="rejected" class="btn reject"
+                                                onclick="return confirm('Apakah Anda yakin ingin menolak lamaran ini?')">
+                                                ✖ Tolak
+                                            </button>
+                                        @endif
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty

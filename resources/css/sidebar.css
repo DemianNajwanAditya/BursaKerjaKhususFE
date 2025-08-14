@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 100%;
+            background: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+            z-index: 1100;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sidebar-header img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .sidebar-header span {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .lists {
+            list-style: none;
+            padding: 10px;
+        }
+
+        .lists .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            color: #707070;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .lists .nav-link:hover {
+            background: #4070f4;
+            color: #fff;
+        }
+
+        .lists .nav-link .icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        /* Bottom menu */
+        .bottom-list {
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        /* Main content */
+        main {
+            margin-left: 260px;
+            padding: 20px;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        /* Mobile */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            font-size: 24px;
+            background: #fff;
+            border-radius: 50%;
+            padding: 8px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            z-index: 1200;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            main {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }

@@ -1,153 +1,36 @@
-/* Reset dasar */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+/* Existing styles... */
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #007bff; /* Sidebar background color */
+    color: white; /* Text color */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    padding: 20px; /* Padding around the sidebar */
 }
 
-body {
-    background-color: #f3f4f6;
-    color: #333;
+.sidebar h1 {
+    font-size: 24px; /* Font size for the title */
+    margin-bottom: 20px; /* Space below the title */
 }
 
-/* Navbar */
-nav {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    padding: 1rem;
+.sidebar img {
+    border-radius: 50%; /* Circular profile picture */
+    width: 100px; /* Width of the profile picture */
+    height: 100px; /* Height of the profile picture */
+    margin-bottom: 20px; /* Space below the profile picture */
 }
 
-nav > div {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.sidebar a {
+    color: white; /* Link color */
+    text-decoration: none; /* No underline */
+    display: block; /* Block display for links */
+    margin: 10px 0; /* Space between links */
 }
 
-nav h1 {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #2563eb;
-}
-
-nav span {
-    color: #4b5563;
-}
-
-nav form button {
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-nav form button:hover {
-    background-color: #dc2626;
-}
-
-/* Container utama */
-div > h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-/* Filter Waktu */
-div > div > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-div > div > div a {
-    background-color: #e5e7eb;
-    color: #374151;
-    padding: 0.3rem 0.6rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-div > div > div a:hover {
-    background-color: #d1d5db;
-}
-
-/* Statistik Cards */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    display: flex;
-    align-items: center;
-}
-
-.card svg {
-    width: 24px;
-    height: 24px;
-    margin-right: 1rem;
-}
-
-.card p:first-child {
-    font-size: 0.9rem;
-    color: #6b7280;
-}
-
-.card p:last-child {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #111827;
-}
-
-/* Role box */
-.role-box {
-    background-color: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-    margin-bottom: 1rem;
-}
-
-.role-box a {
-    display: inline-block;
-    margin-top: 0.8rem;
-    background-color: #2563eb;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: background 0.2s;
-}
-
-.role-box a:hover {
-    background-color: #1d4ed8;
-}
-
-/* Warna untuk status pelamar */
-.status-accepted {
-    color: #16a34a;
-    font-weight: bold;
-}
-
-.status-rejected {
-    color: #dc2626;
-    font-weight: bold;
-}
-
-.status-pending {
-    color: #ca8a04;
-    font-weight: bold;
+.sidebar a:hover {
+    text-decoration: underline; /* Underline on hover */
 }

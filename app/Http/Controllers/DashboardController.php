@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\Berita;
+use App\Models\Jurusan;
 use App\Models\JobPost;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -41,7 +43,11 @@ class DashboardController extends Controller
             'pending_applicants' => (clone $applicationsQuery)->where('status', 'pending')->count(),
         ];
         
-        return view('dashboard', compact('user', 'statistics', 'filter'));
+        // Get berita and jurusan data
+        $beritas = Berita::with('user')->latest()->take(3)->get();
+        $jurusans = Jurusan::all();
+        
+        return view('dashboard', compact('user', 'statistics', 'filter', 'beritas', 'jurusans'));
     }
     
     private function applyTimeFilter($query, $filter, $column = 'created_at')
