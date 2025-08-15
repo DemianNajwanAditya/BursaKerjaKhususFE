@@ -7,7 +7,7 @@
 </header>
     
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero" style="background-image: url('{{ asset('images/depansmkn4.jpeg') }}');">  
   <div class="logo-container">
       <img src="images/logo-smk.png" alt="Logo SMK" />
       <img src="images/logo-disdik.png" alt="Logo Disdik" />
@@ -69,43 +69,55 @@
   </section>
 
   <!-- Tentang Sekolah -->
-  <section class="tentang">
+  <section class="tentang" style="background-image: url('{{ asset('images/lapangan.jpeg') }}');">
     <h2>Tentang SMKN 4 BANDUNG</h2>
     <p>SMKN 4 BANDUNG adalah Sekolah Menengah Kejuruan yang memiliki kelompok bidang keahlian Ketenagalistrikan, Audio Video, dan Teknik Komputer dan Informatika. Keberadaannya didukung oleh dunia usaha dan dunia industri, baik dalam pembelajaran maupun penyerapan lulusannya. Pembelajaran teori dan praktik tidak hanya dilakukan di dalam kelas tetapi juga dilakukan di dunia industri melalui praktek kerja industri di perusahaan-perusahaan yang relevan.</p>
-    <p>Lulusannya telah tersebar di berbagai perguruan tinggi dan Dunia Usaha/Dunia Industri. Kesempatan untuk melanjutkan studi dan bekerja sangat terbuka luas bagi lulusannya.</p>
+    <p>Lulusannya telah tersebar di berbagai perguruan tinggi dan Dunia Usaha/Dunia Industri. Kesempatan untuk melanjutkan studi dan bekerja sangat terbuka luas bagi lulusannya. Jalur PMDK tersedia bagi lulusan yang berprestasi baik PN maupun Swasta. Bagi siswa yang ingin bekerja, penempatan didukung oleh Dinasker melalui Bursa Kerja Khusus (BKK) sesuai dengan kualifikasi yang di persyaratkan oleh perusahaan, serta siswa dapat berwirausaha sesuai dengan kopetensi keahlian masing-masing.</p>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="logo-container">
-      <img src="images/logo-jabar.png" alt="Logo Jabar" />
-      <img src="images/tut.png" alt="Logo Tut" />
-      <img src="images/smkn4.png" alt="Logo SMKN 4" />
-    </div>
-    <div class="footer-info">
-      <div class="alamat">
-        <h3>SMK NEGERI 4 BANDUNG</h3>
-        <p>Jl. Kliningan No.6, Turangga, Kec. Lengkong</p>
-        <p>Telp/Fax : (022) – 7303736</p>
-        <p>Kode Pos : 40264 Kota Bandung</p>
-        <p>Provinsi Jawa Barat, Indonesia</p>
+  <div class="footer-info">
+    <!-- Kiri -->
+    <div class="alamat">
+      <div class="logo-footer">
+        <img src="images/logo-jabar.png" alt="Logo 1">
+        <img src="images/tut.png" alt="Logo 2">
+        <img src="images/smkn4.png" alt="Logo 3">
       </div>
-      <div class="tautan">
-        <a href="https://disdik.jabarprov.go.id/">Dinas Pendidikan Jawa Barat</a>
-        <a href="https://kemendikdasmen.go.id/">Kementrian Pendidikan dan Kebudayaan</a>
-        <a href="https://referensi.data.kemendikdasmen.go.id/">Referensi Pendidikan</a>
-        <a href="https://data.komdigi.go.id/article/literasi-digital-indonesia">Digital Literasi</a>
-        <a href="https://smkbisa.id/">SMK Bisa</a>
-      </div>
+      <h3>SMK NEGERI 4 BANDUNG</h3>
+      <p>
+        Jl. Kliningan No.6, Turangga, Kec. Lengkong<br>
+        Telp/Fax : (022) – 7303736<br>
+        Kode Pos : 40264 Kota Bandung<br>
+        Provinsi Jawa Barat<br>
+        Indonesia
+      </p>
     </div>
-    <div class="sosmed">
-      <a href="https://instagram.com/smknegeri4bandung"><img src="images/instagram.png" alt="Instagram"></a>
-      <a href="https://youtube.com/@SMKN4BANDUNGOfficial"><img src="images/youtube.png" alt="YouTube"></a>
-      <a href="https://facebook.com/smkn4bandung"><img src="images/facebook.png" alt="Facebook"></a>
-      <a href="https://tiktok.com/@smknegeri4bandung"><img src="images/tiktok.jpg" alt="TikTok"></a>
+
+    <!-- Kanan -->
+    <div class="tautan">
+      <a href="https://disdik.jabarprov.go.id/">Dinas Pendidikan Jawa Barat</a>
+      <a href="https://kemendikdasmen.go.id/">Kementrian Pendidikan dan Kebudayaan</a>
+      <a href="https://referensi.data.kemendikdasmen.go.id/">Referensi Pendidikan</a>
+      <a href="https://data.komdigi.go.id/article/literasi-digital-indonesia">Digital Literasi</a>
+      <a href="https://smkbisa.id/">Smk Bisa</a>
     </div>
-    <p class="copyright">Copyright © 2017 <strong>smkn4bdg.sch.id</strong> All Rights Reserved</p>
-  </footer>
+  </div>
+
+  <!-- Sosmed -->
+  <div class="sosmed">
+    <a href="https://x.com/smkn4bdg"><img src="/images/X.png" alt="X"></a>
+    <a href="https://tiktok.com/@smknegeri4bandung"><img src="images/tiktok.jpg" alt="Tiktok"></a>
+    <a href="https://instagram.com/smknegeri4bandung"><img src="images/instagram.png" alt="Instagram"></a>
+    <a href="https://youtube.com/@SMKN4BANDUNGOfficial"><img src="images/youtube.png" alt="Youtube"></a>
+    <a href="https://facebook.com/smkn4bandung"><img src="images/facebook.png" alt="Facebook"></a>
+  </div>
+
+  <!-- Copyright -->
+  <div class="copyright">
+    <p>Copyright © 2017 <strong>smkn4bdg.sch.id</strong> All Rights Reserved</p>
+  </div>
 
 </body>
 </html>

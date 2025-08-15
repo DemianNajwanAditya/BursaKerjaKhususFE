@@ -11,7 +11,7 @@ body {
   color: #ffffff;
 }
 
-/* Header */
+/* ================== HEADER ================== */
 header {
   background-color: #003f91;
   padding: 10px 20px;
@@ -37,18 +37,71 @@ header nav a:hover {
   color: #007bff;
 }
 
-/* Hero Section */
+/* ================== HERO SECTION ================== */
 .hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-              url('Image/bg-sekolah.jpg') center/cover no-repeat;
+  position: relative;
+  background: url('images/depansmkn4.jpeg') center/cover no-repeat;
   color: white;
-  padding: 100px 30px;
-  text-align: center;
+  min-height: 400px; /* ini yang bikin lebih menjulur ke bawah */
+  padding: 150px 30px; /* tambah jarak atas bawah */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* biar konten vertikal di tengah */
 }
 
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+
+.hero-top {
+  position: relative;
+  z-index: 2;
+}
+
+.logo-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.logo-container img {
+  height: 50px;
+}
+
+/* Teks hero */
 .hero-content {
+  position: relative;
+  z-index: 2;
+  margin-top: 20px;
   max-width: 900px;
-  margin: auto;
+}
+
+.hero-content h1 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.hero-content p {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1;
 }
 
 .sosmed-hero {
@@ -63,7 +116,7 @@ header nav a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 10px 15px;
   border-radius: 20px;
   color: white;
@@ -77,17 +130,24 @@ header nav a:hover {
   height: 24px;
 }
 
-/* Sambutan */
+/* ================== SAMBUTAN ================== */
 .sambutan {
   display: flex;
-  padding: 50px;
+  align-items: flex-start;
   gap: 40px;
-  background-color: #3366CC;
+  padding: 50px;
+  background: 
+    linear-gradient(rgba(0, 51, 153, 0.85), rgba(0, 51, 153, 0.85)),
+    url('images/motif-batik.png'); /* Ganti dengan motif kamu */
+  background-size: cover;
+  background-position: center;
+  color: white;
 }
 
-.foto-kepsek img {
+.sambutan img {
   border-radius: 50%;
   width: 250px;
+  flex-shrink: 0; /* Biar nggak mengecil */
 }
 
 .teks-sambutan {
@@ -95,17 +155,65 @@ header nav a:hover {
 }
 
 .teks-sambutan h2 {
-  color: #ffffff;
-  font-size: 28px;
+  font-size: 32px;
   margin-bottom: 10px;
 }
 
-/* Tentang */
+.teks-sambutan h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.teks-sambutan ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.teks-sambutan li {
+  margin-bottom: 6px;
+}
+
+.teks-sambutan p {
+  margin-bottom: 10px;
+}
+
+.sosmed {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.sosmed a img {
+  width: 32px;
+  height: 32px;
+}
+
+
+/* ================== TENTANG ================== */
 .tentang {
-  background: #222;
+  position: relative;
+  background: url('images/depansmkn4.jpeg') center/cover no-repeat;
   color: white;
-  padding: 50px 30px;
+  padding: 150px 30px;
   text-align: center;
+}
+
+.tentang::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* overlay gelap */
+  z-index: 1;
+}
+
+.tentang h2,
+.tentang p {
+  position: relative;
+  z-index: 2; /* supaya di atas overlay */
 }
 
 .tentang h2 {
@@ -113,43 +221,91 @@ header nav a:hover {
   margin-bottom: 20px;
 }
 
-/* Footer */
-footer {
-  background-color: #111;
-  color: white;
-  padding: 30px;
+.tentang p {
+  max-width: 900px;
+  margin: auto;
+  line-height: 1.6;
 }
 
+/* ================== FOOTER ================== */
+footer {
+  background-color: #6d7c8f;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Bagian atas footer: info alamat & tautan */
 .footer-info {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+  padding: 20px;
 }
 
-.footer-info .alamat,
-.footer-info .tautan {
-  width: 45%;
-  margin-bottom: 20px;
+.footer-info .alamat {
+  max-width: 50%;
 }
 
-.footer-info a {
+.footer-info .alamat h3 {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.footer-info .alamat p {
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.logo-footer {
+  display: flex;
+  gap: 15px;
+}
+
+.logo-footer img {
+  height: 60px;
+}
+
+.footer-info .tautan a {
   display: block;
-  color: white;
+  color: #d9e2ef;
   text-decoration: none;
   margin: 5px 0;
+  font-size: 14px;
 }
 
+.footer-info .tautan a:hover {
+  text-decoration: underline;
+}
+
+/* Bagian ikon sosmed */
 .sosmed {
-  text-align: center;
-  margin: 20px 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 10px 20px;
 }
 
 .sosmed img {
   width: 32px;
-  margin: 0 10px;
+  height: 32px;
 }
 
-footer p {
+/* Bagian copyright biru tua */
+.copyright {
+  background-color: #2f455c; /* biru tua */
   text-align: center;
-  font-size: 14px;
+  padding: 10px 0;
+}
+
+.copyright p {
+  font-size: 20px;
+  margin: 0;
+  color: white;
+}
+
+.copyright p strong {
+  font-weight: bold;
+  color: white;
 }
