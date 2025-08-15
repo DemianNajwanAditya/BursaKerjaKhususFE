@@ -10,6 +10,8 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminJobPostController;
+use App\Http\Controllers\RegisteredUserController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [HomeController::class, 'login'])->name('login');
@@ -22,6 +24,11 @@ Route::post('/register', [RegisteredUserController::class, 'store'])->name('regi
 Route::get('/statistics', [HomeController::class, 'statistics'])->name('statistics');
 Route::get('/achievements', [HomeController::class, 'achievements'])->name('achievements');
 Route::get('/info', [HomeController::class, 'info'])->name('info');
+
+// Temporary route to check authentication
+Route::get('/check-auth', function () {
+    return Auth::check() ? 'User is authenticated' : 'User is not authenticated';
+});
 
 // Dashboard Routes
 Route::middleware(['auth'])->group(function () {
@@ -39,12 +46,23 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/admin/users/{user}', [AdminDashboardController::class, 'updateUser'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [AdminDashboardController::class, 'deleteUser'])->name('admin.users.delete');
     
+    // Job Posts Management for Admin
+    Route::resource('job-posts', AdminJobPostController::class)->names([
+        'index' => 'admin.job-posts.index',
+        'create' => 'admin.job-posts.create',
+        'store' => 'admin.job-posts.store',
+        'edit' => 'admin.job-posts.edit',
+        'update' => 'admin.job-posts.update',
+        'destroy' => 'admin.job-posts.destroy',
+    ]);
+    
     // Berita Routes
     Route::prefix('berita')->group(function () {
         Route::get('/', [BeritaController::class, 'index'])->name('berita.index');
         Route::get('/create', [BeritaController::class, 'create'])->name('berita.create');
         Route::post('/', [BeritaController::class, 'store'])->name('berita.store');
         Route::get('/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
+        Route::delete('/{berita:slug}', [BeritaController::class, 'destroy'])->name('berita.destroy');
     });
     
     // Jurusan Routes

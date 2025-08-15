@@ -83,14 +83,16 @@ class ApplicationController extends Controller
     /**
      * Store a new application (for students)
      */
-    public function store(Request $request, JobPost $job)
+    public function store(Request $request)
     {
         $request->validate([
+            'job_post_id' => 'required|exists:job_posts,id',
             'cv' => 'nullable|mimes:pdf|max:2048',
             'cover_letter' => 'nullable|string|max:2000',
         ]);
 
         $user = Auth::user();
+        $job = JobPost::findOrFail($request->job_post_id);
 
         // Prevent duplicate applications
         if (Application::where('user_id', $user->id)
@@ -105,7 +107,7 @@ class ApplicationController extends Controller
 
         $application = Application::create([
             'user_id' => $user->id,
-            'job_post_id' => $job->id,
+            'job_post_id' => $request->job_post_id,
             'cv_path' => $cvPath,
             'cover_letter' => $request->cover_letter,
             'status' => 'pending',

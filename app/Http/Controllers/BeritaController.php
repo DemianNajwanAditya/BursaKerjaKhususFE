@@ -48,4 +48,16 @@ class BeritaController extends Controller
     {
         return view('berita.show', compact('berita'));
     }
+
+    public function destroy(Berita $berita)
+    {
+        // Hapus foto jika ada
+        if ($berita->foto) {
+            Storage::disk('public')->delete($berita->foto);
+        }
+        
+        $berita->delete();
+        
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus!');
+    }
 }

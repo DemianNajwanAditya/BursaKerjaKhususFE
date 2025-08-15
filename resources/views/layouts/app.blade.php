@@ -23,9 +23,6 @@
                 <li><a href="{{ route('dashboard') }}"><i class="fa-solid fa-house"></i> Halaman Utama</a></li>
                 <li><a href="{{ route('jobs.index') }}"><i class="fa-solid fa-briefcase"></i> Lowongan Kerja</a></li>
                 <li><a href="{{ route('berita.index') }}"><i class="fa-solid fa-newspaper"></i> Berita</a></li>
-                @if(auth()->check() && auth()->user()->role === 'admin')
-                    <li><a href="{{ route('berita.create') }}"><i class="fa-solid fa-plus"></i> Tambah Berita</a></li>
-                @endif
                 @if(auth()->check() && auth()->user()->role === 'company')
                     <li><a href="{{ route('company.jobs.create') }}"><i class="fa-solid fa-plus"></i> Tambah Lowongan</a></li>
                     <li><a href="{{ route('company.jobs.index') }}"><i class="fa-solid fa-briefcase"></i> Kelola Lowongan</a></li>
@@ -34,6 +31,7 @@
                 @if(auth()->check() && auth()->user()->role === 'admin')
                     <li><a href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-cog"></i> Admin Dashboard</a></li>
                     <li><a href="{{ route('admin.users') }}"><i class="fa-solid fa-users"></i> Kelola User</a></li>
+                    <li><a href="{{ route('admin.job-posts.index') }}"><i class="fa-solid fa-briefcase"></i> Kelola Data Lowongan Kerja</a></li>
                 @endif
                 @if(auth()->check() && auth()->user()->role === 'student')
                     <li><a href="{{ route('profile.upload-cv') }}"><i class="fa-solid fa-upload"></i> Upload CV</a></li>

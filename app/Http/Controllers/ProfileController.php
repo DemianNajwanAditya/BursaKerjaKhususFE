@@ -24,13 +24,6 @@ class ProfileController extends Controller
             'cv' => 'required|file|mimes:pdf|max:2048',
         ]);
 
-        $path = $request->file('cv')->storeAs(
-            'cvs',
-            time() . '_' . $request->file('cv')->getClientOriginalName(),
-            'public'
-        );
-
-        $user = Auth::user();
         $path = $request->file('cv')->store('cv_files', 'public');
         /** @var \App\Models\User $user */
         $user->update([

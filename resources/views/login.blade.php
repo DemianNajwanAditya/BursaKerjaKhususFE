@@ -24,8 +24,8 @@
 
         <div class="input-group">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" id="password">
-              <i class="fa fa-eye-slash" id="togglePassword"></i>
+            <input type="password" name="password" placeholder="Password" id="password" required>
+            <i class="fa fa-eye-slash" id="togglePassword"></i>
         </div>
         <div>
             <label>
