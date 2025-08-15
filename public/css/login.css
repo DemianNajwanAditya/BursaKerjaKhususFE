@@ -1,0 +1,123 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #222;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+            font-size: 24px;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            width: 320px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            font-size: 16px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 35px 10px 35px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 4px rgba(0,123,255,0.2);
+        }
+
+        .input-group .toggle-password {
+            position: absolute;
+            right: 10px; /* Jarak dari sisi kanan */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .input-group .fa-user,
+        .input-group .fa-lock {
+        left: 10px; /* jarak icon kiri */
+        }  
+        
+        .input-group .fa-eye,
+        .input-group .fa-eye-slash {
+            right: 10px; /* jarak icon kanan */
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .alert-error {
+            background-color: #ffe5e5;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: #b30000;
+        }
+
+        .alert-success {
+            background-color: #e5ffe5;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-top: 10px;
+            color: #006600;
+        }
