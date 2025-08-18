@@ -16,7 +16,7 @@ header {
   background-color: #003f91;
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -43,7 +43,7 @@ header nav a:hover {
   background: url('images/depansmkn4.jpeg') center/cover no-repeat;
   color: white;
   min-height: 400px; /* ini yang bikin lebih menjulur ke bawah */
-  padding: 150px 30px; /* tambah jarak atas bawah */
+  padding: 20px 30px; /* tambah jarak atas bawah */
   display: flex;
   flex-direction: column;
   justify-content: center; /* biar konten vertikal di tengah */
@@ -66,9 +66,12 @@ header nav a:hover {
 }
 
 .logo-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   display: flex;
   gap: 20px;
-  align-items: center;
+  z-index: 2;
 }
 
 .logo-container img {
@@ -79,18 +82,19 @@ header nav a:hover {
 .hero-content {
   position: relative;
   z-index: 2;
-  margin-top: 20px;
-  max-width: 900px;
+  margin-top: 60px;
+  max-width: 2000px;
 }
 
 .hero-content h1 {
-  font-size: 28px;
+  font-size: 32px;
+  margin-top: 150px;
   font-weight: bold;
 }
 
 .hero-content p {
-  font-size: 16px;
-  margin-top: 10px;
+  font-size: 25px;
+  margin-top: 50px;
 }
 
 .hero::before {
@@ -100,15 +104,14 @@ header nav a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
 
 .sosmed-hero {
-  margin-top: 30px;
+  margin-top: 200px;
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: center; /* rata kiri */
+  gap: 300px; /* jarak antar icon */
   flex-wrap: wrap;
 }
 
@@ -142,39 +145,48 @@ header nav a:hover {
   background-size: cover;
   background-position: center;
   color: white;
+  background: rgba(118, 170, 255, 0.6);
 }
 
 .sambutan img {
+  margin-top: 120px;
   border-radius: 50%;
   width: 250px;
   flex-shrink: 0; /* Biar nggak mengecil */
 }
 
 .teks-sambutan {
+  font-family: Calibri;
   flex: 1;
+  font-size: 20px;
 }
 
 .teks-sambutan h2 {
-  font-size: 32px;
+  font-family: Calibri Regular atau Segoe UI Regular;
+  font-size: 40px;
   margin-bottom: 10px;
 }
 
 .teks-sambutan h3 {
+  font-family: Calibri Regular atau Segoe UI Regular;
   font-size: 20px;
   margin-bottom: 15px;
 }
 
 .teks-sambutan ul {
+  font-family: Calibri Regular atau Segoe UI Regular;
   list-style: disc;
   padding-left: 20px;
   margin-bottom: 20px;
 }
 
 .teks-sambutan li {
+  font-family: Calibri Regular atau Segoe UI Regular;
   margin-bottom: 6px;
 }
 
 .teks-sambutan p {
+  font-family: Calibri Regular atau Segoe UI Regular;
   margin-bottom: 10px;
 }
 
@@ -196,7 +208,7 @@ header nav a:hover {
   background: url('images/depansmkn4.jpeg') center/cover no-repeat;
   color: white;
   padding: 150px 30px;
-  text-align: center;
+  text-align: justify;
 }
 
 .tentang::before {
@@ -217,6 +229,7 @@ header nav a:hover {
 }
 
 .tentang h2 {
+  text-align: center;
   font-size: 32px;
   margin-bottom: 20px;
 }
@@ -240,8 +253,10 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-  padding: 20px;
+  padding: 20px; /* tetap ada padding kiri-kanan */
+  align-items: flex-end; /* semua konten ditarik ke bawah dekat garis */
 }
+
 
 .footer-info .alamat {
   max-width: 50%;
@@ -267,17 +282,29 @@ footer {
   height: 60px;
 }
 
+.footer-info .tautan {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* teks tautan nempel bawah */
+  align-items: flex-start;   /* rata kiri */
+  margin: 0;
+  padding: 0;
+}
+
 .footer-info .tautan a {
-  display: block;
-  color: #d9e2ef;
+  color: #dcdcdc;
   text-decoration: none;
-  margin: 5px 0;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.2; /* rapet */
+  margin: 0;        /* hapus jarak antar teks */
+  padding: 0;
 }
 
 .footer-info .tautan a:hover {
   text-decoration: underline;
+  color: #ffffff; /* hover jadi putih */
 }
+
 
 /* Bagian ikon sosmed */
 .sosmed {
@@ -288,8 +315,9 @@ footer {
 }
 
 .sosmed img {
-  width: 32px;
-  height: 32px;
+  margin-top: -30px;
+  width: 200px;
+  height: 40px;
 }
 
 /* Bagian copyright biru tua */
@@ -300,7 +328,7 @@ footer {
 }
 
 .copyright p {
-  font-size: 20px;
+  font-size: 20qwpx;
   margin: 0;
   color: white;
 }

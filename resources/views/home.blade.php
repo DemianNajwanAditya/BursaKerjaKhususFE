@@ -19,15 +19,15 @@
     <p>Bursa Kerja Khusus (BKK) SMKN 4 Bandung merupakan layanan resmi sekolah yang berfungsi sebagai jembatan antara dunia pendidikan dan dunia kerja. Dalam Website ini menyediakan informasi terkini seputar lowongan pekerjaan, magang, rekrutmen, serta pelatihan karir yang ditujukan bagi siswa, dan alumni.</p>
 
     <div class="sosmed-hero">
-      <a href="#"><img src="images/instagram.png" alt="Instagram">@smknegeri4bandung</a>
-      <a href="#"><img src="images/youtube.png" alt="YouTube">SMKN 4 BANDUNG OFFICIAL</a>
-      <a href="#"><img src="images/facebook.png" alt="Facebook">SMKN 4 BANDUNG</a>
+      <a href="https://instagram.com/smknegeri4bandung"><img src="images/instagram.png" alt="Instagram">@smknegeri4bandung</a>
+      <a href="https://youtube.com/@SMKN4BANDUNGOfficial"><img src="images/youtube.png" alt="YouTube">SMKN 4 BANDUNG OFFICIAL</a>
+      <a href="https://facebook.com/smkn4bandung"><img src="images/facebook.png" alt="Facebook">SMKN 4 BANDUNG</a>
     </div>
   </div>
 </section>
 
   <!-- Sambutan Kepala Sekolah -->
-  <section class="sambutan">
+  <section class="sambutan" style="background-image: url('{{ asset('images/batik.jpeg') }}');">
     <div class="foto-kepsek">
       <img src="images/kepsek.jpeg" alt="Kepala Sekolah">
     </div>
@@ -116,7 +116,7 @@
 
   <!-- Copyright -->
   <div class="copyright">
-    <p>Copyright © 2017 <strong>smkn4bdg.sch.id</strong> All Rights Reserved</p>
+    <p>2025 <strong>smkn4bdg.sch.id</strong> All Rights Reserved</p>
   </div>
 
 </body>
