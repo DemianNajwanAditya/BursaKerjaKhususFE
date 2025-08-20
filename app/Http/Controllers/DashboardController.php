@@ -22,11 +22,18 @@ class DashboardController extends Controller
         
         // Apply role-based filtering
         if ($user->role === 'company') {
-            $companyId = $user->company->id;
-            $jobPostsQuery->where('company_id', $companyId);
-            $applicationsQuery->whereHas('jobPost', function($query) use ($companyId) {
-                $query->where('company_id', $companyId);
-            });
+            $company = $user->company;
+            if ($company) {
+                $companyId = $company->id;
+                $jobPostsQuery->where('company_id', $companyId);
+                $applicationsQuery->whereHas('jobPost', function($query) use ($companyId) {
+                    $query->where('company_id', $companyId);
+                });
+            } else {
+                // If company doesn't exist, return empty results
+                $jobPostsQuery->where('company_id', 0);
+                $applicationsQuery->where('id', 0);
+            }
         }
         
         // Apply time filters

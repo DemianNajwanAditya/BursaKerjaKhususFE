@@ -32,6 +32,7 @@
                     <li><a href="{{ route('admin.dashboard') }}"><i class="fa-solid fa-cog"></i> Admin Dashboard</a></li>
                     <li><a href="{{ route('admin.users') }}"><i class="fa-solid fa-users"></i> Kelola User</a></li>
                     <li><a href="{{ route('admin.job-posts.index') }}"><i class="fa-solid fa-briefcase"></i> Kelola Data Lowongan Kerja</a></li>
+                    <li><a href="{{ route('lamarans.index') }}"><i class="fas fa-users"></i> Kelola Pelamar</a></li>
                 @endif
                 @if(auth()->check() && auth()->user()->role === 'student')
                     <li><a href="{{ route('profile.upload-cv') }}"><i class="fa-solid fa-upload"></i> Upload CV</a></li>

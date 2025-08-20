@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log; // Menambahkan import untuk Log
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StatusLamaranMail;
@@ -42,13 +44,21 @@ class NotifikasiController extends Controller
      */
     public function lamaranDiajukan($user, $job)
     {
-        Mail::to($user->email)->send(new StatusLamaranMail(
-            $user->name,
-            $job->title,
-            $job->company->name,
-            'apply',
-            url('/dashboard')
-        ));
+        if (!$user || !$job || !$job->company) {
+            return;
+        }
+
+        try {
+            Mail::to($user->email)->send(new StatusLamaranMail(
+                $user->name ?? 'User',
+                $job->title ?? 'Unknown Position',
+                $job->company->name ?? 'Unknown Company',
+                'apply',
+                url('/dashboard')
+            ));
+        } catch (\Exception $e) {
+            Log::error('Failed to send application notification: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -56,15 +66,23 @@ class NotifikasiController extends Controller
      */
     public function updateStatusLamaran($user, $job, $status)
     {
+        if (!$user || !$job || !$job->company) {
+            return;
+        }
+
         $tipe = $status == 'accepted' ? 'diterima' : 'ditolak';
 
-        Mail::to($user->email)->send(new StatusLamaranMail(
-            $user->name,
-            $job->title,
-            $job->company->name,
-            $tipe,
-            url('/dashboard')
-        ));
+        try {
+            Mail::to($user->email)->send(new StatusLamaranMail(
+                $user->name ?? 'User',
+                $job->title ?? 'Unknown Position',
+                $job->company->name ?? 'Unknown Company',
+                $tipe,
+                url('/dashboard')
+            ));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send status update notification: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -72,12 +90,20 @@ class NotifikasiController extends Controller
      */
     public function verifikasiPerusahaan($company)
     {
-        Mail::to($company->email)->send(new StatusLamaranMail(
-            $company->owner_name,
-            '-', // posisi tidak relevan
-            $company->name,
-            'verifikasi',
-            url('/dashboard')
-        ));
+        if (!$company || !$company->email) {
+            return;
+        }
+
+        try {
+            Mail::to($company->email)->send(new StatusLamaranMail(
+                $company->owner_name ?? $company->name ?? 'Company Owner',
+                '-', // posisi tidak relevan
+                $company->name ?? 'Unknown Company',
+                'verifikasi',
+                url('/dashboard')
+            ));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send verification notification: ' . $e->getMessage());
+        }
     }
 }

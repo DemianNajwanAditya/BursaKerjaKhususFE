@@ -12,6 +12,9 @@ use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminJobPostController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\LamaranController;
+use App\Http\Controllers\LowonganController;
+use Illuminate\Container\Attributes\Auth;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [HomeController::class, 'login'])->name('login');
@@ -104,5 +107,11 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/upload-cv', [ProfileController::class, 'showUploadForm'])->name('profile.upload-cv');
         Route::post('/upload-cv', [ProfileController::class, 'uploadCv'])->name('profile.upload-cv.post');
+    });
+Route::middleware(['auth'])->group(function () {
+        Route::resource('lowongans', LowonganController::class);
+        Route::resource('lamarans', LamaranController::class);
+        Route::get('/dashboard/lamarans', [LamaranController::class, 'index'])->name('lamarans.index');
+        Route::post('/dashboard/lamarans/{id}/status', [LamaranController::class, 'updateStatus'])->name('lamarans.updateStatus');
     });
 });
