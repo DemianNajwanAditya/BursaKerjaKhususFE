@@ -1,26 +1,44 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Status Lamaran')
-
 @section('content')
-    <h2>Edit Status Lamaran</h2>
+    <h2>Edit Lamaran</h2>
 
-    <form action="{{ route('lamarans.update', $lamaran->id) }}" method="POST">
+    {{-- Error --}}
+    @if ($errors->any())
+        <div style="color: red; background: #ffecec; padding: 10px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('lamarans.update', $lamaran->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
-        <p><strong>Nama Pelamar:</strong> {{ $lamaran->name_pelamar }}</p>
-        <p><strong>Lowongan:</strong> {{ $lamaran->lowongan->judul ?? '-' }}</p>
+        <div>
+            <label for="nama_pelamar">Nama Pelamar</label><br>
+            <input type="text" name="nama_pelamar" id="nama_pelamar" 
+                   value="{{ old('nama_pelamar', $lamaran->nama_pelamar) }}" required>
+        </div>
 
-        <label for="status">Pilih Status:</label>
-        <select name="status" id="status" required>
-            <option value="Menunggu" {{ $lamaran->status == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
-            <option value="Diterima" {{ $lamaran->status == 'Diterima' ? 'selected' : '' }}>Diterima</option>
-            <option value="Ditolak" {{ $lamaran->status == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
-        </select>
+        <div>
+            <label for="lowongan">Lowongan</label><br>
+            <input type="text" name="lowongan" id="lowongan" 
+                   value="{{ old('lowongan', $lamaran->lowongan) }}" required>
+        </div>
 
-        <br><br>
-        <button type="submit">Simpan</button>
-        <a href="{{ route('lamarans.index') }}">Kembali</a>
+        <div>
+            <label for="cv">Upload CV (PDF/DOC/DOCX)</label><br>
+            <input type="file" name="cv" id="cv">
+            @if($lamaran->cv)
+                <p>CV sekarang: <a href="{{ asset('storage/'.$lamaran->cv) }}" target="_blank">Lihat CV</a></p>
+            @endif
+        </div>
+
+        <button type="submit">Update Lamaran</button>
+        <a href="{{ route('lamarans.index') }}">Batal</a>
     </form>
 @endsection

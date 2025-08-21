@@ -36,6 +36,7 @@
                 @endif
                 @if(auth()->check() && auth()->user()->role === 'student')
                     <li><a href="{{ route('profile.upload-cv') }}"><i class="fa-solid fa-upload"></i> Upload CV</a></li>
+                     <li><a href="{{ route('lamarans.create') }}"><i class="fa-solid fa-paper-plane"></i> Ajukan Lamaran</a></li> <!-- ✅ Tambahan -->
                 @endif
                 <li><a href="{{ route('statistics') }}"><i class="fa-solid fa-chart-line"></i> Statistik</a></li>
                 <li><a href="{{ route('achievements') }}"><i class="fa-solid fa-trophy"></i> Prestasi</a></li>

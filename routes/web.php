@@ -110,7 +110,10 @@ Route::middleware(['auth'])->group(function () {
     });
 Route::middleware(['auth'])->group(function () {
         Route::resource('lowongans', LowonganController::class);
+        Route::resource('lamarans', LamaranController::class)->except(['edit', 'update', 'destroy']);
         Route::resource('lamarans', LamaranController::class);
+        Route::get('/lamarans/{lamaran}/edit', [LamaranController::class, 'edit'])->name('lamarans.edit');
+        Route::put('/lamarans/{lamaran}', [LamaranController::class, 'update'])->name('lamarans.update');
         Route::get('/dashboard/lamarans', [LamaranController::class, 'index'])->name('lamarans.index');
         Route::post('/dashboard/lamarans/{id}/status', [LamaranController::class, 'updateStatus'])->name('lamarans.updateStatus');
     });

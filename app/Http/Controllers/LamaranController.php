@@ -22,25 +22,31 @@ class LamaranController extends Controller
         return view('dashboard.lamarans.show', compact('lamaran'));
     }
 
-    public function edit($id)
+    public function edit(Lamaran $lamaran)
     {
-        $lamaran = Lamaran::findOrFail($id);
         return view('dashboard.lamarans.edit', compact('lamaran'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Lamaran $lamaran)
     {
-        $lamaran = Lamaran::findOrFail($id);
-
         $request->validate([
-            'status' => 'required|in:Menunggu,Diterima,Ditolak'
+            'nama_pelamar' => 'required|string|max:255',
+            'lowongan'     => 'required|string|max:255',
+            'cv'           => 'nullable|mimes:pdf,doc,docx|max:2048',
         ]);
 
-        $lamaran->update([
-            'status' => $request->status
-        ]);
+        // Update data
+        $lamaran->nama_pelamar = $request->nama_pelamar;
+        $lamaran->lowongan     = $request->lowongan;
 
-        return redirect()->route('lamarans.index')->with('success', 'Status pelamar berhasil diperbarui.');
+        if ($request->hasFile('cv')) {
+            $cvPath = $request->file('cv')->store('cv', 'public');
+            $lamaran->cv = $cvPath;
+        }
+
+        $lamaran->save();
+
+        return redirect()->route('lamarans.index')->with('success', 'Lamaran berhasil diperbarui!');
     }
     // Update status pelamar (diterima/ditolak)
     public function updateStatus(Request $request, $id)
@@ -60,15 +66,21 @@ class LamaranController extends Controller
 
     public function store(Request $request)
     {
-        $cvPath = $request->file('cv')->store('cv', 'public');
 
-        Lamaran::create([
-            'user_id' => Auth::id(), // ambil user yang login
-            'lowongan_id' => $request->lowongan_id,
-            'cv' => $cvPath,
-            'status' => 'pending',
-        ]);
+    $validated = $request->validate([
+        'nama_pelamar' => 'required|string|max:255',
+        'lowongan'     => 'required|string|max:255',
+        'cv'           => 'required|file|mimes:pdf,doc,docx|max:2048',
+    ]);
 
+    $path = $request->file('cv')->store('cvs', 'public');
+
+    Lamaran::create([
+        'nama_pelamar' => $request->nama_pelamar,
+        'lowongan'     => $request->lowongan,
+        'cv'           => $path,
+        'status'       => 'pending',
+    ]);
         return redirect()->route('lamarans.index')->with('success', 'Lamaran berhasil dikirim!');
     }
 }
