@@ -14,8 +14,10 @@ use App\Http\Controllers\AdminJobPostController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\LamaranController;
 use App\Http\Controllers\LowonganController;
-use Illuminate\Container\Attributes\Auth;
 
+use Illuminate\Support\Facades\Auth;
+
+// ================== PUBLIC ROUTES ==================
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::post('/login', [HomeController::class, 'authenticate'])->name('authenticate');
@@ -33,8 +35,10 @@ Route::get('/check-auth', function () {
     return Auth::check() ? 'User is authenticated' : 'User is not authenticated';
 });
 
-// Dashboard Routes
+// ================== AUTH ROUTES ==================
 Route::middleware(['auth'])->group(function () {
+
+    // ===== Dashboard Routes =====
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     
@@ -51,70 +55,85 @@ Route::middleware(['auth'])->group(function () {
     
     // Job Posts Management for Admin
     Route::resource('job-posts', AdminJobPostController::class)->names([
-        'index' => 'admin.job-posts.index',
-        'create' => 'admin.job-posts.create',
-        'store' => 'admin.job-posts.store',
-        'edit' => 'admin.job-posts.edit',
-        'update' => 'admin.job-posts.update',
+        'index'   => 'admin.job-posts.index',
+        'create'  => 'admin.job-posts.create',
+        'store'   => 'admin.job-posts.store',
+        'edit'    => 'admin.job-posts.edit',
+        'update'  => 'admin.job-posts.update',
         'destroy' => 'admin.job-posts.destroy',
     ]);
     
-    // Berita Routes
-    Route::prefix('berita')->group(function () {
-        Route::get('/', [BeritaController::class, 'index'])->name('berita.index');
-        Route::get('/create', [BeritaController::class, 'create'])->name('berita.create');
-        Route::post('/', [BeritaController::class, 'store'])->name('berita.store');
-        Route::get('/{berita:slug}', [BeritaController::class, 'show'])->name('berita.show');
-        Route::delete('/{berita:slug}', [BeritaController::class, 'destroy'])->name('berita.destroy');
+    // ===== Berita Routes =====
+    Route::prefix('berita')->name('berita.')->group(function () {
+        Route::get('/', [BeritaController::class, 'index'])->name('index');
+        Route::get('/create', [BeritaController::class, 'create'])->name('create');
+        Route::post('/', [BeritaController::class, 'store'])->name('store');
+        Route::get('/{berita:slug}', [BeritaController::class, 'show'])->name('show');
+        Route::delete('/{berita:slug}', [BeritaController::class, 'destroy'])->name('destroy');
     });
     
-    // Jurusan Routes
-    Route::prefix('jurusan')->group(function () {
-        Route::get('/', [JurusanController::class, 'index'])->name('jurusan.index');
-        Route::get('/{jurusan:slug}', [JurusanController::class, 'show'])->name('jurusan.show');
+    // ===== Jurusan Routes =====
+    Route::prefix('jurusan')->name('jurusan.')->group(function () {
+        Route::get('/', [JurusanController::class, 'index'])->name('index');
+        Route::get('/{jurusan:slug}', [JurusanController::class, 'show'])->name('show');
     });
     
-    // Job Routes
-    Route::prefix('jobs')->group(function () {
-        Route::get('/', [JobPostController::class, 'index'])->name('jobs.index');
-        Route::get('/{job}', [JobPostController::class, 'show'])->name('jobs.show');
+    // ===== Job Routes =====
+    Route::prefix('jobs')->name('jobs.')->group(function () {
+        Route::get('/', [JobPostController::class, 'index'])->name('index');
+        Route::get('/{job}', [JobPostController::class, 'show'])->name('show');
     });
     
-    // Application Routes
-    Route::prefix('applications')->group(function () {
-        Route::post('/', [ApplicationController::class, 'store'])->name('applications.store');
-        Route::get('/{application}', [ApplicationController::class, 'show'])->name('applications.show');
+    // ===== Application Routes =====
+    Route::prefix('applications')->name('applications.')->group(function () {
+        Route::post('/', [ApplicationController::class, 'store'])->name('store');
+        Route::get('/{application}', [ApplicationController::class, 'show'])->name('show');
     });
     
-    // Company Routes
-    Route::prefix('company')->middleware('role:company')->group(function () {
-        Route::get('/jobs', [JobPostController::class, 'companyIndex'])->name('company.jobs.index');
-        Route::get('/jobs/create', [JobPostController::class, 'create'])->name('company.jobs.create');
-        Route::post('/jobs', [JobPostController::class, 'store'])->name('company.jobs.store');
-        Route::get('/jobs/{job}/edit', [JobPostController::class, 'edit'])->name('company.jobs.edit');
-        Route::put('/jobs/{job}', [JobPostController::class, 'update'])->name('company.jobs.update');
-        Route::delete('/jobs/{job}', [JobPostController::class, 'destroy'])->name('company.jobs.destroy');
-        Route::get('/applications', [ApplicationController::class, 'indexForCompany'])->name('company.applications.index');
-        Route::get('/applications/{application}/preview', [ApplicationController::class, 'previewPdf'])->name('company.applications.preview');
-        Route::get('/applications/{application}/download', [ApplicationController::class, 'downloadPdf'])->name('company.applications.download');
-        Route::put('/applications/{application}/status', [ApplicationController::class, 'updateStatus'])->name('company.applications.updateStatus');
+    // ===== Company Routes =====
+    Route::prefix('company')->middleware('role:company')->name('company.')->group(function () {
+        Route::get('/jobs', [JobPostController::class, 'companyIndex'])->name('jobs.index');
+        Route::get('/jobs/create', [JobPostController::class, 'create'])->name('jobs.create');
+        Route::post('/jobs', [JobPostController::class, 'store'])->name('jobs.store');
+        Route::get('/jobs/{job}/edit', [JobPostController::class, 'edit'])->name('jobs.edit');
+        Route::put('/jobs/{job}', [JobPostController::class, 'update'])->name('jobs.update');
+        Route::delete('/jobs/{job}', [JobPostController::class, 'destroy'])->name('jobs.destroy');
+
+        Route::get('/applications', [ApplicationController::class, 'indexForCompany'])->name('applications.index');
+        Route::get('/applications/{application}/preview', [ApplicationController::class, 'previewPdf'])->name('applications.preview');
+        Route::get('/applications/{application}/download', [ApplicationController::class, 'downloadPdf'])->name('applications.download');
+        Route::put('/applications/{application}/status', [ApplicationController::class, 'updateStatus'])->name('applications.updateStatus');
     });
     
-    // Profile Routes
-    Route::prefix('profile')->group(function () {
-        Route::get('/', [ProfileController::class, 'show'])->name('profile');
-        Route::get('/show', [ProfileController::class, 'show'])->name('profile.show');
-        Route::put('/', [ProfileController::class, 'update'])->name('profile.update');
-        Route::get('/upload-cv', [ProfileController::class, 'showUploadForm'])->name('profile.upload-cv');
-        Route::post('/upload-cv', [ProfileController::class, 'uploadCv'])->name('profile.upload-cv.post');
+    // ===== Profile Routes =====
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'show'])->name('index');
+        Route::get('/show', [ProfileController::class, 'show'])->name('show');
+        Route::put('/', [ProfileController::class, 'update'])->name('update');
+        Route::get('/upload-cv', [ProfileController::class, 'showUploadForm'])->name('upload-cv');
+        Route::post('/upload-cv', [ProfileController::class, 'uploadCv'])->name('upload-cv.post');
     });
-Route::middleware(['auth'])->group(function () {
-        Route::resource('lowongans', LowonganController::class);
-        Route::resource('lamarans', LamaranController::class)->except(['edit', 'update', 'destroy']);
-        Route::resource('lamarans', LamaranController::class);
-        Route::get('/lamarans/{lamaran}/edit', [LamaranController::class, 'edit'])->name('lamarans.edit');
-        Route::put('/lamarans/{lamaran}', [LamaranController::class, 'update'])->name('lamarans.update');
-        Route::get('/dashboard/lamarans', [LamaranController::class, 'index'])->name('lamarans.index');
-        Route::post('/dashboard/lamarans/{id}/status', [LamaranController::class, 'updateStatus'])->name('lamarans.updateStatus');
+
+    // ===== Lamaran Routes =====
+    Route::prefix('lamarans')->name('lamarans.')->group(function () {
+        Route::get('/', [LamaranController::class, 'index'])->name('index');
+        Route::get('/create', [LamaranController::class, 'create'])->name('create');
+        Route::post('/', [LamaranController::class, 'store'])->name('store');
+        Route::get('/{lamaran}', [LamaranController::class, 'show'])->name('show');
+        Route::get('/{lamaran}/edit', [LamaranController::class, 'edit'])->name('edit');
+        Route::put('/{lamaran}', [LamaranController::class, 'update'])->name('update');
+        Route::delete('/{lamaran}', [LamaranController::class, 'destroy'])->name('destroy');
+        Route::post('/{id}/status', [LamaranController::class, 'updateStatus'])->name('updateStatus');
+    });
+
+    // ===== Lowongan Routes =====
+    Route::prefix('lowongans')->name('lowongans.')->group(function () {
+        Route::get('/', [LowonganController::class, 'index'])->name('index');
+        Route::get('/create', [LowonganController::class, 'create'])->name('create');
+        Route::post('/', [LowonganController::class, 'store'])->name('store');
+        Route::get('/{lowongan}', [LowonganController::class, 'show'])->name('show');
+        Route::get('/{lowongan}/edit', [LowonganController::class, 'edit'])->name('edit');
+        Route::put('/{lowongan}', [LowonganController::class, 'update'])->name('update');
+        Route::delete('/{lowongan}', [LowonganController::class, 'destroy'])->name('destroy');
     });
 });

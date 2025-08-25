@@ -41,7 +41,7 @@
                 <li><a href="{{ route('statistics') }}"><i class="fa-solid fa-chart-line"></i> Statistik</a></li>
                 <li><a href="{{ route('achievements') }}"><i class="fa-solid fa-trophy"></i> Prestasi</a></li>
                 <li><a href="{{ route('info') }}"><i class="fa-solid fa-info-circle"></i> Informasi</a></li>
-                <li><a href="{{ route('profile') }}"><i class="fa-solid fa-user"></i> Profil Saya</a></li>
+                <li><a href="{{ route('profile.index') }}"><i class="fa-solid fa-user"></i> Profil Saya</a></li>
                 <li>
                     <form id="logoutForm" action="{{ route('logout') }}" method="POST" style="margin:0;">
                         @csrf

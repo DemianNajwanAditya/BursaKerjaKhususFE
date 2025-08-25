@@ -9,17 +9,11 @@ class Lowongan extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'judul',
-        'deskripsi',
-        'perusahaan',
-        'lokasi',
-        'gaji',
-    ];
+    protected $fillable = ['judul', 'deskripsi'];
 
-    // Relasi: satu lowongan bisa punya banyak lamaran
+    // Relasi ke Lamaran
     public function lamarans()
     {
-        return $this->hasMany(Lamaran::class);
+        return $this->hasMany(Lamaran::class, 'lowongan');
     }
 }

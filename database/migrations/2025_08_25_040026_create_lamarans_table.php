@@ -6,26 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
         Schema::create('lamarans', function (Blueprint $table) {
             $table->id();
-
-            // relasi
-            $table->unsignedBigInteger('user_id');      // pelamar
-            $table->unsignedBigInteger('lowongan_id');  // lowongan yang dilamar
-
-            // field yang dipake di blade
-            $table->enum('status', ['terima', 'tolak', 'wawancara', 'menunggu'])->default('menunggu');
-
+            $table->unsignedBigInteger('user_id');      // Pelamar (relasi ke users)
+            $table->unsignedBigInteger('lowongan_id');  // Relasi ke lowongan
+            $table->string('nama_pelamar');             // Nama pelamar
+            $table->string('cv')->nullable();           // File CV
+            $table->string('status')->default('pending'); // Status: pending, diterima, ditolak
             $table->timestamps();
 
-            // foreign keys
+            // Foreign key
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('lowongan_id')->references('id')->on('lowongans')->onDelete('cascade');
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
         Schema::dropIfExists('lamarans');
