@@ -1,14 +1,30 @@
-@extends('layouts.app')
-
-@section('content')
-
 <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 <div class="dashboard-container">
-    <!-- Header -->
-    <div class="dashboard-header">
-        <h1>Selamat Datang di Dashboard BKK</h1>
-        <p>Berita Terkini dan Informasi Jurusan</p>
+
+<!-- Header Utama -->
+<div class="dashboard-main-header">
+    <div class="header-left">
+        <button class="menu-btn">&#9776;</button> <!-- ikon menu -->
     </div>
+    <div class="header-center">
+        <h1>Selamat Datang, {{ Auth::user()->name ?? 'Username' }}</h1>
+    </div>
+    <div class="header-right">
+        <button class="notif-btn">&#128276;</button> <!-- ikon lonceng -->
+    </div>
+</div>
+
+
+<!-- Background Foto -->
+<div class="dashboard-header-bg" style="background-image: url('{{ asset('images/lapangan.jpeg') }}');">
+    <div class="overlay">
+    </div>
+</div>
+
+
+<div class="dashboard-container">
+    <!-- isi dashboard lainnya -->
+
 
     <!-- Admin Actions (only for admin) -->
     @if(auth()->user()->role === 'admin')
@@ -66,4 +82,4 @@
         </div>
     </div>
 </div>
-@endsection
+

@@ -1,339 +1,296 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-body {
-  font-family: 'Poppins', sans-serif;
+  body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #fff;
+    color: #ffffff;
+  }
+
+  /* ================== HEADER ================== */
+  header {
+    background-color: #003f91;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .header-left img {
+    height: 40px;
+    margin-right: 15px;
+  }
+
+  header nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+  }
+
+  header nav a:hover {
+    color: #007bff;
+  }
+
+  /* ================== HERO SECTION ================== */
+  .hero {
+    position: relative;
+    background: url('images/depansmkn4.jpeg') center/cover no-repeat;
+    color: white;
+    min-height: 400px; /* ini yang bikin lebih menjulur ke bawah */
+    padding: 20px 30px; /* tambah jarak atas bawah */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* biar konten vertikal di tengah */
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .hero-top {
+    position: relative;
+    z-index: 2;
+  }
+
+  .logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    gap: 20px;
+    z-index: 2;
+  }
+
+  .logo-container img {
+    height: 50px;
+  }
+
+  /* Teks hero */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    margin-top: 60px;
+    max-width: 2000px;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+    margin-top: 150px;
+    font-weight: bold;
+  }
+
+  .hero-content p {
+    font-size: 25px;
+    margin-top: 50px;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .sosmed-hero {
+    margin-top: 200px;
+    display: flex;
+    justify-content: center; /* rata kiri */
+    gap: 300px; /* jarak antar icon */
+    flex-wrap: wrap;
+  }
+
+  .sosmed-hero a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px 15px;
+    border-radius: 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .sosmed-hero img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* ================== TIM BKK ================== */
+  .tim-bkk {
+    background-color: #d9e9f5; /* warna biru muda sesuai gambar ke-1 */
+    padding: 60px 30px;
+    text-align: center;
+  }
+
+  .tim-bkk h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #002b5b;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .tim-bkk p {
+  color: #000000;   /* teks hitam */
+  text-align: left; /* rata kiri */
+  max-width: 1000px; /* biar rapi, teks gak kepanjangan */
+  margin: 0 auto 40px auto; /* kasih jarak bawah sebelum "Tim BKK" */
+  font-size: 20px;
   line-height: 1.6;
-  background-color: #fff;
-  color: #ffffff;
 }
 
-/* ================== HEADER ================== */
-header {
-  background-color: #003f91;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  flex-wrap: wrap;
-}
+  .tim-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
 
-.header-left img {
-  height: 40px;
-  margin-right: 15px;
-}
+  .tim-bkk .card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    width: 180px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-align: center;
+  }
 
-header nav a {
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0 10px;
-  font-weight: 500;
-}
-
-header nav a:hover {
-  color: #007bff;
-}
-
-/* ================== HERO SECTION ================== */
-.hero {
-  position: relative;
-  background: url('images/depansmkn4.jpeg') center/cover no-repeat;
-  color: white;
-  min-height: 400px; /* ini yang bikin lebih menjulur ke bawah */
-  padding: 20px 30px; /* tambah jarak atas bawah */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* biar konten vertikal di tengah */
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 1;
-}
-
-.hero-top {
-  position: relative;
-  z-index: 2;
-}
-
-.logo-container {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  gap: 20px;
-  z-index: 2;
-}
-
-.logo-container img {
-  height: 50px;
-}
-
-/* Teks hero */
-.hero-content {
-  position: relative;
-  z-index: 2;
-  margin-top: 60px;
-  max-width: 2000px;
-}
-
-.hero-content h1 {
-  font-size: 32px;
-  margin-top: 150px;
-  font-weight: bold;
-}
-
-.hero-content p {
-  font-size: 25px;
-  margin-top: 50px;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-
-.sosmed-hero {
-  margin-top: 200px;
-  display: flex;
-  justify-content: center; /* rata kiri */
-  gap: 300px; /* jarak antar icon */
-  flex-wrap: wrap;
-}
-
-.sosmed-hero a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 10px 15px;
-  border-radius: 20px;
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 14px;
-}
-
-.sosmed-hero img {
-  width: 24px;
-  height: 24px;
-}
-
-/* ================== SAMBUTAN ================== */
-.sambutan {
-  display: flex;
-  align-items: flex-start;
-  gap: 40px;
-  padding: 50px;
-  background: 
-    linear-gradient(rgba(0, 51, 153, 0.85), rgba(0, 51, 153, 0.85)),
-    url('images/motif-batik.png'); /* Ganti dengan motif kamu */
-  background-size: cover;
-  background-position: center;
-  color: white;
-  background: rgba(118, 170, 255, 0.6);
-}
-
-.sambutan img {
-  margin-top: 120px;
+  .tim-bkk .card .foto {
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  width: 250px;
-  flex-shrink: 0; /* Biar nggak mengecil */
-}
-
-.teks-sambutan {
-  font-family: Calibri;
-  flex: 1;
-  font-size: 20px;
-}
-
-.teks-sambutan h2 {
-  font-family: Calibri Regular atau Segoe UI Regular;
-  font-size: 40px;
-  margin-bottom: 10px;
-}
-
-.teks-sambutan h3 {
-  font-family: Calibri Regular atau Segoe UI Regular;
-  font-size: 20px;
-  margin-bottom: 15px;
-}
-
-.teks-sambutan ul {
-  font-family: Calibri Regular atau Segoe UI Regular;
-  list-style: disc;
-  padding-left: 20px;
-  margin-bottom: 20px;
-}
-
-.teks-sambutan li {
-  font-family: Calibri Regular atau Segoe UI Regular;
-  margin-bottom: 6px;
-}
-
-.teks-sambutan p {
-  font-family: Calibri Regular atau Segoe UI Regular;
-  margin-bottom: 10px;
-}
-
-.sosmed {
+  overflow: hidden; /* biar img bulat */
+  margin: 0 auto 15px auto;
+  background: #ccc; /* abu-abu default */
   display: flex;
-  gap: 15px;
-  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
 }
 
-.sosmed a img {
-  width: 32px;
-  height: 32px;
-}
+  .tim-bkk .card h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+  }
+
+  .tim-bkk .card p {
+    font-size: 14px;
+    color: gray;
+    text-align: center;
+  }
+
+  /* ================== FOOTER ================== */
+  footer {
+    background-color: #6d7c8f;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Bagian atas footer: info alamat & tautan */
+  .footer-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+    padding: 20px; /* tetap ada padding kiri-kanan */
+    align-items: flex-end; /* semua konten ditarik ke bawah dekat garis */
+  }
 
 
-/* ================== TENTANG ================== */
-.tentang {
-  position: relative;
-  background: url('images/depansmkn4.jpeg') center/cover no-repeat;
-  color: white;
-  padding: 150px 30px;
-  text-align: justify;
-}
+  .footer-info .alamat {
+    max-width: 50%;
+  }
 
-.tentang::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* overlay gelap */
-  z-index: 1;
-}
+  .footer-info .alamat h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
 
-.tentang h2,
-.tentang p {
-  position: relative;
-  z-index: 2; /* supaya di atas overlay */
-}
+  .footer-info .alamat p {
+    line-height: 1.5;
+    font-size: 14px;
+  }
 
-.tentang h2 {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 70px;
-}
+  .logo-footer {
+    display: flex;
+    gap: 15px;
+  }
 
-.tentang p {
-  max-width: 900px;
-  margin: 0 auto 30px auto;
-  line-height: 1.6;
-}
+  .logo-footer img {
+    height: 60px;
+  }
 
-/* ================== FOOTER ================== */
-footer {
-  background-color: #6d7c8f;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-}
+  .footer-info .tautan {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* teks tautan nempel bawah */
+    align-items: flex-start;   /* rata kiri */
+    margin: 0;
+    padding: 0;
+  }
 
-/* Bagian atas footer: info alamat & tautan */
-.footer-info {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-  padding: 20px; /* tetap ada padding kiri-kanan */
-  align-items: flex-end; /* semua konten ditarik ke bawah dekat garis */
-}
+  .footer-info .tautan a {
+    color: #dcdcdc;
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 1.2; /* rapet */
+    margin: 0;        /* hapus jarak antar teks */
+    padding: 0;
+  }
+
+  .footer-info .tautan a:hover {
+    text-decoration: underline;
+    color: #ffffff; /* hover jadi putih */
+  }
 
 
-.footer-info .alamat {
-  max-width: 50%;
-}
+  /* Bagian ikon sosmed */
+  .sosmed {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding: 10px 20px;
+  }
 
-.footer-info .alamat h3 {
-  margin: 10px 0;
-  font-size: 18px;
-  font-weight: bold;
-}
+  .sosmed img {
+    margin-top: 0px;
+    width: 50px;
+    height: 50px;
+  }
 
-.footer-info .alamat p {
-  line-height: 1.5;
-  font-size: 14px;
-}
+  /* Bagian copyright biru tua */
+  .copyright {
+    background-color: #2f455c; /* biru tua */
+    text-align: center;
+    padding: 10px 0;
+  }
 
-.logo-footer {
-  display: flex;
-  gap: 15px;
-}
+  .copyright p {
+    font-size: 20qwpx;
+    margin: 0;
+    color: white;
+  }
 
-.logo-footer img {
-  height: 60px;
-}
-
-.footer-info .tautan {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end; /* teks tautan nempel bawah */
-  align-items: flex-start;   /* rata kiri */
-  margin: 0;
-  padding: 0;
-}
-
-.footer-info .tautan a {
-  color: #dcdcdc;
-  text-decoration: none;
-  font-size: 13px;
-  line-height: 1.2; /* rapet */
-  margin: 0;        /* hapus jarak antar teks */
-  padding: 0;
-}
-
-.footer-info .tautan a:hover {
-  text-decoration: underline;
-  color: #ffffff; /* hover jadi putih */
-}
-
-
-/* Bagian ikon sosmed */
-.sosmed {
-  display: flex;
-  justify-content: flex-end;
-  gap: 15px;
-  padding: 10px 20px;
-}
-
-.sosmed img {
-  margin-top: -30px;
-  width: 200px;
-  height: 40px;
-}
-
-/* Bagian copyright biru tua */
-.copyright {
-  background-color: #2f455c; /* biru tua */
-  text-align: center;
-  padding: 10px 0;
-}
-
-.copyright p {
-  font-size: 20qwpx;
-  margin: 0;
-  color: white;
-}
-
-.copyright p strong {
-  font-weight: bold;
-  color: white;
-}
+  .copyright p strong {
+    font-weight: bold;
+    color: white;
+  }

@@ -16,63 +16,53 @@
     </div>
   <div class="hero-content">
     <h1>BURSA KERJA KHUSUS SMKN 4 BANDUNG</h1>
-    <p>Bursa Kerja Khusus (BKK) SMKN 4 Bandung merupakan layanan resmi sekolah yang berfungsi sebagai jembatan antara dunia pendidikan dan dunia kerja. Dalam Website ini menyediakan informasi terkini seputar lowongan pekerjaan, magang, rekrutmen, serta pelatihan karir yang ditujukan bagi siswa, dan alumni.</p>
 
     <div class="sosmed-hero">
       <a href="https://instagram.com/smknegeri4bandung"><img src="images/instagram.png" alt="Instagram">@smknegeri4bandung</a>
       <a href="https://youtube.com/@SMKN4BANDUNGOfficial"><img src="images/youtube.png" alt="YouTube">SMKN 4 BANDUNG OFFICIAL</a>
-      <a href="https://facebook.com/smkn4bandung"><img src="images/facebook.png" alt="Facebook">SMKN 4 BANDUNG</a>
+      <a href="https://smkn4bdg.sch.id/"><img src="images/smkn4.png" alt="Website">SMKN 4 BANDUNG</a>
     </div>
   </div>
 </section>
 
-  <!-- Sambutan Kepala Sekolah -->
-  <section class="sambutan" style="background-image: url('{{ asset('images/batik.jpeg') }}');">
-    <div class="foto-kepsek">
-      <img src="images/kepsek.jpeg" alt="Kepala Sekolah">
+  <!-- Tim BKK -->
+  <section class="tim-bkk">
+    <h2>Tentang BKK</h2>
+    <p>Bursa Kerja Khusus (BKK) SMKN 4 Bandung merupakan layanan resmi sekolah yang berfungsi sebagai jembatan antara dunia pendidikan dan dunia kerja. Dalam website ini menyediakan informasi terkini seputar lowongan pekerjaan, magang, rekrutmen, serta pelatihan karir yang ditujukan bagi siswa dan alumni.</p>
+    <h2>Tim BKK</h2>
+<div class="tim-container">
+  <div class="card">
+    <div class="foto">
+      <img src="images/foto-default.jpg" alt="Default">
     </div>
-    <div class="teks-sambutan">
-      <h2>Sambutan Kepala Sekolah</h2>
-      <h3>Dr. Agus Setiawan, S.Pd, M.Si</h3>
-      <p>Sampurasun, SMKN 4 BANDUNG adalah Sekolah Menengah Kejuruan yang memiliki kelompok program keahlian:</p>
-      <ol>
-        <li>Teknik Ketenaga Listrikan (TKTL)</li>
-        <ul>
-          <li>Teknik Instalasi Tenaga Listrik (TITL)</li>
-        </ul>
-        <li>Teknik Elektronika</li>
-        <ul>
-          <li>Teknik Audio Vidio (TAV)</li>
-          <li>Teknik Otomasi Industri (TOI)</li>
-        </ul>
-        <li>Teknik Jaringan Komputer dan Telekomunikasi</li>
-        <ul>
-            <li>Teknik Komputer dan Jaringan (TKJ)</li>
-        </ul>
-        <li>Pemrograman Perangkat Lunak dan Gim</li>
-        <ul>
-            <li>Rekayasa Perangkat Lunak (RPL)</li>
-        </ul>
-        <li>Desain Komunikasi Visual</li>
-        <ul>
-            <li>Desain Komunikasi Visual (DKV)</li>
-        </ul>
-      </ol>
-      <p>Tujuan SMK:</p>
-      <ol>
-        <li>Memantapkan siswa dalam keimanan dan ketakwaan</li>
-        <li>Mampu menambah kompetensi di bidang IT</li>
-        <li>Mampu menjadi entrepreneur</li>
-        <li>Siap bekerja sesuai kebutuhan industri</li>
-      </ol>
-    </div>
-  </section>
+    <h3>Nama Staff</h3>
+    <p>Staff BKK</p>
+  </div>
 
-  <!-- Tentang Sekolah -->
-  <section class="tentang" style="background-image: url('{{ asset('images/lapangan.jpeg') }}');">
-    <h2>Tentang SMKN 4 BANDUNG</h2>
-    <p>SMKN 4 BANDUNG adalah Sekolah Menengah Kejuruan yang memiliki kelompok bidang keahlian Ketenagalistrikan, Audio Video, dan Teknik Komputer dan Informatika. Keberadaannya didukung oleh dunia usaha dan dunia industri, baik dalam pembelajaran maupun penyerapan lulusannya. Pembelajaran teori dan praktik tidak hanya dilakukan di dalam kelas tetapi juga dilakukan di dunia industri melalui praktek kerja industri di perusahaan-perusahaan yang relevan.</p>
-    <p>Lulusannya telah tersebar di berbagai perguruan tinggi dan Dunia Usaha/Dunia Industri. Kesempatan untuk melanjutkan studi dan bekerja sangat terbuka luas bagi lulusannya. Jalur PMDK tersedia bagi lulusan yang berprestasi baik PN maupun Swasta. Bagi siswa yang ingin bekerja, penempatan didukung oleh Dinasker melalui Bursa Kerja Khusus (BKK) sesuai dengan kualifikasi yang di persyaratkan oleh perusahaan, serta siswa dapat berwirausaha sesuai dengan kopetensi keahlian masing-masing.</p>
+  <div class="card">
+    <div class="foto">
+      <img src="images/foto-default.png" alt="Default">
+    </div>
+    <h3>Nama Staff</h3>
+    <p>Staff BKK</p>
+  </div>
+
+  <div class="card">
+    <div class="foto">
+      <img src="images/foto-default.png" alt="Default">
+    </div>
+    <h3>Nama Staff</h3>
+    <p>Staff BKK</p>
+  </div>
+
+  <div class="card">
+    <div class="foto">
+      <img src="images/foto-default.png" alt="Default">
+    </div>
+    <h3>Nama Staff</h3>
+    <p>Staff BKK</p>
+  </div>
+</div>
   </section>
 
   <!-- Footer -->
@@ -107,10 +97,7 @@
 
   <!-- Sosmed -->
   <div class="sosmed">
-    <a href="https://x.com/smkn4bdg"><img src="/images/X.png" alt="X"></a>
-    <a href="https://tiktok.com/@smknegeri4bandung"><img src="images/tiktok.jpg" alt="Tiktok"></a>
     <a href="https://instagram.com/smknegeri4bandung"><img src="images/instagram.png" alt="Instagram"></a>
-    <a href="https://youtube.com/@SMKN4BANDUNGOfficial"><img src="images/youtube.png" alt="Youtube"></a>
     <a href="https://facebook.com/smkn4bandung"><img src="images/facebook.png" alt="Facebook"></a>
   </div>
 

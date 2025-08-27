@@ -24,6 +24,81 @@
 }
 
 /* =========================
+   Dashboard Main Header (mirip gambar)
+========================= */
+.dashboard-main-header {
+    background-color: #043263;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.dashboard-main-header h1 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Posisi kiri (menu) */
+.menu-btn, .notif-btn {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Posisi kanan (notifikasi) */
+.notif-btn {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Tengah biar rata */
+.header-center {
+    flex: 1;
+    text-align: center;
+}
+
+/* Background foto */
+.dashboard-header-bg {
+    background: url('/images/sekolah.jpg') no-repeat center center/cover;
+    height: 400px; /* bisa disesuaikan */
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+/* Overlay hitam transparan biar teks jelas */
+.dashboard-header-bg .overlay {
+    background: rgba(0,0,0,0.4);
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0 0 12px 12px;
+}
+
+.dashboard-header-bg h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.dashboard-header-bg p {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+/* =========================
    Section Title
 ========================= */
 .section-title {
@@ -39,52 +114,70 @@
 ========================= */
 .berita-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    justify-items: center;
 }
 
 .berita-card {
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
+    width: 100%;
+    max-width: 320px; /* supaya konsisten seperti lowongan */
     transition: transform 0.3s ease;
 }
 
 .berita-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 }
 
 .berita-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .berita-content {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .berita-title {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #1f2937;
     margin-bottom: 0.5rem;
 }
 
 .berita-excerpt {
+    font-size: 0.875rem;
     color: #6b7280;
     margin-bottom: 1rem;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
 .berita-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: #9ca3af;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: #fff;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
 }
 
 /* Button Primary */
