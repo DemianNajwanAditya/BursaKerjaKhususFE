@@ -11,6 +11,54 @@
     color: #ffffff;
   }
 
+  .hero-content h1 {
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animasi SlideUp untuk Paragraf Hero */
+.hero-content p {
+  opacity: 0;
+  animation: slideUp 1.5s ease forwards;
+  animation-delay: 0.5s; /* muncul setelah judul */
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animasi Hover untuk Card Tim BKK */
+.tim-bkk .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tim-bkk .card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Animasi Hover Sosmed di Hero */
+.sosmed-hero a {
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+.sosmed-hero a:hover {
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Animasi Ikon Sosmed Footer */
+.sosmed img {
+  transition: transform 0.3s ease;
+}
+.sosmed img:hover {
+  transform: rotate(10deg) scale(1.1);
+}
+
   /* ================== HEADER ================== */
   header {
     background-color: #003f91;
