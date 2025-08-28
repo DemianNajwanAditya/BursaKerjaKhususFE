@@ -60,7 +60,11 @@
                 <h1>Selamat Datang, asep</h1>
             </div>
             <div class="header-right">
-                <button class="notif-btn">🔔</button>
+                <button class="notif-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 24a2.4 2.4 0 0 0 2.4-2.4h-4.8A2.4 2.4 0 0 0 12 24zm6.4-6V11a6.4 6.4 0 0 0-5.6-6.32V4a.8.8 0 0 0-1.6 0v.68A6.4 6.4 0 0 0 5.6 11v7l-1.6 1.6v.8h16v-.8L18.4 18z"/>
+                    </svg>
+                    </button>
             </div>
         </div>
 
@@ -68,10 +72,9 @@
         <div class="dashboard-header-bg">
             <div class="dashboard-header-bg" style="background-image: url('{{ asset('images/lapangan.jpeg') }}');">
             <div class="overlay">
-                <h2>SMK Negeri 4 Bandung</h2>x  
             </div>
         </div>
-x`
+
            <div>
                 <h2 class="section-title">LOWONGAN TERBARU</h2>
                 <div class="lowongan-grid">
@@ -200,8 +203,8 @@ x`
     <!-- Kiri -->
     <div class="alamat">
       <div class="logo-footer">
-        <img src="images/logo-jabar.png" alt="Logo 1">
-        <img src="images/tut.png" alt="Logo 2">
+        <img src="images/jabar.png" alt="Logo 1">
+        <img src="images/disdik.png" alt="Logo 2">
         <img src="images/smkn4.png" alt="Logo 3">
       </div>
       <h3>SMK NEGERI 4 BANDUNG</h3>
@@ -227,7 +230,7 @@ x`
   <!-- Sosmed -->
   <div class="sosmed">
     <a href="https://instagram.com/smknegeri4bandung"><img src="images/instagram.png" alt="Instagram"></a>
-    <a href="https://facebook.com/smkn4bandung"><img src="images/facebook.png" alt="Facebook"></a>
+    <a href="https://www.youtube.com/@SMKN4BANDUNGOfficial"><img src="images/youtube.png" alt="Youtube"></a>
   </div>
 
   <!-- Copyright -->

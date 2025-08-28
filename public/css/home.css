@@ -108,7 +108,7 @@
   }
 
   .sosmed-hero {
-    margin-top: 200px;
+    margin-top: 250px;
     display: flex;
     justify-content: center; /* rata kiri */
     gap: 200px; /* jarak antar icon */
@@ -117,7 +117,7 @@
 
   .sosmed-hero a {
     display: flex;
-    align-items: center;
+    align-items: center;  
     gap: 8px;
     background-color: rgba(255, 255, 255, 0.1);
     padding: 10px 15px;
@@ -135,7 +135,7 @@
 
   /* ================== TIM BKK ================== */
   .tim-bkk {
-    background-color: whitesmoke; /* warna biru muda sesuai gambar ke-1 */
+    background-color: rgb(157, 157, 157); /* warna biru muda sesuai gambar ke-1 */
     padding: 60px 30px;
     text-align: center;
   }
@@ -199,7 +199,7 @@
 
   /* ================== FOOTER ================== */
   footer {
-    background-color: #6d7c8f;
+    background-color: #6e6e6e;
     color: white;
     font-family: 'Poppins', sans-serif;
   }
