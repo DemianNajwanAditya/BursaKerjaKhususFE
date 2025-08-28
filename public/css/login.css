@@ -17,7 +17,7 @@
 
         h2 {
             margin-bottom: 20px;
-            color: #007bff;
+            color: #002b5b;
             font-size: 24px;
         }
 
@@ -54,7 +54,7 @@
         }
 
         .input-group input:focus {
-            border-color: #007bff;
+            border-color: #002b5b;
             box-shadow: 0 0 4px rgba(0,123,255,0.2);
         }
 
@@ -82,7 +82,7 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #002b5b;
             color: white;
             border: none;
             border-radius: 6px;
