@@ -64,5 +64,6 @@ togglePassword.addEventListener('click', function () {
     this.classList.toggle('fa-eye-slash');
 });
     </script>
+    <script src="{{ asset('js/login.js') }}"></script>
 </body>
 </html>
