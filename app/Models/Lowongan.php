@@ -9,11 +9,10 @@ class Lowongan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['judul', 'deskripsi'];
+    protected $fillable = ['judul', 'deskripsi', 'lokasi', 'gaji', 'batas_akhir'];
 
-    // Relasi ke Lamaran
     public function lamarans()
     {
-        return $this->hasMany(Lamaran::class, 'lowongan');
+        return $this->hasMany(Lamaran::class);
     }
 }

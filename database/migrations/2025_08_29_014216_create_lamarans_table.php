@@ -7,16 +7,18 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('lowongans', function (Blueprint $table) {
+        Schema::create('lamarans', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->text('deskripsi')->nullable();
+            $table->string('nama_pelamar');
+            $table->string('lowongan');
+            $table->string('cv')->nullable();
+            $table->enum('status', ['pending', 'diterima', 'ditolak'])->default('pending');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('lowongans');
+        Schema::dropIfExists('lamarans');
     }
 };

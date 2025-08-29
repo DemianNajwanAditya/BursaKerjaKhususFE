@@ -11,9 +11,8 @@ class Lamaran extends Model
 
     protected $fillable = ['nama_pelamar', 'lowongan', 'cv', 'status'];
 
-    // Relasi ke Lowongan
     public function lowongan()
     {
-        return $this->belongsTo(Lowongan::class, 'lowongan');
+        return $this->belongsTo(Lowongan::class);
     }
 }
