@@ -14,6 +14,9 @@
         </div>
     @endif
 
+    <!-- Container animasi Lottie -->
+    <div id="lottie-animation" style="width:250px; height:250px; margin:0 auto 20px;"></div>
+
     <form action="{{ route('login') }}" method="POST">
         @csrf
 
@@ -51,19 +54,35 @@
         </div>
     @endif
 
+        <!-- ANIMASI -->
+        <div class="animation-box">
+            <div id="lottie-animation"></div>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <script>
+        // Toggle Password
         const togglePassword = document.getElementById('togglePassword');
-const password = document.getElementById('password');
+        const password = document.getElementById('password');
 
-togglePassword.addEventListener('click', function () {
-    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-    password.setAttribute('type', type);
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
 
-    // ganti icon
-    this.classList.toggle('fa-eye');
-    this.classList.toggle('fa-eye-slash');
-});
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Lottie Animation
+        lottie.loadAnimation({
+            container: document.getElementById("lottie-animation"),
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://lottie.host/ae75b9b9-c8f8-4db5-a30c-3c0c1de2c026/jmhHHxwSkA.json"
+        });
     </script>
-    <script src="{{ asset('js/login.js') }}"></script>
 </body>
 </html>

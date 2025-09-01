@@ -422,3 +422,33 @@ a:focus {
         opacity: 1;
     }
 }
+
+/* Wrapper untuk form + animasi */
+.login-wrapper {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    gap: 60px;
+    flex-wrap: wrap; /* biar tetap responsif */
+}
+
+/* form tetap di kiri */
+.form-box {
+    flex: 1;
+    max-width: 400px;
+    min-width: 320px;
+}
+
+/* animasi di kanan */
+.animation-box {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    min-width: 300px;
+}
+
+#lottie-animation {
+    width: 100%;
+    max-width: 400px;
+}
