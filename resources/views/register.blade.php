@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 
-@push ('styles')
+@section('title', 'Register Student')
+
+@section('css')
 <link rel="stylesheet" href="{{ asset('css/register-student.css') }}">
-<script src="{{ asset('js/register-student.js') }}"></script>
-@endpush
+@endsection
 
 @section('content')
 <div class="container register-student">
@@ -88,3 +89,9 @@
     </div>
 </div>
 @endsection
+
+@section('js')
+<script src="{{ asset('js/register-student.js') }}"></script>
+@endsection
+
+<p></p>
