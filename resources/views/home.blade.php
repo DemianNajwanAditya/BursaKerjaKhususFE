@@ -12,8 +12,8 @@
         <nav class="nav">
             <div class="logo">BKK Opat</div>
             <div class="auth-buttons">
-                <a href="{{ route('login') }}" class="btn btn-login" id="loginBtn">Masuk</a>
-                <a href="{{ route('register') }}" class="btn btn-register" id="registerBtn">Daftar</a>
+                <a href="{{ route('login') }}" class="btn btn-login" id="loginBtn">Login</a>
+                <a href="{{ route('register') }}" class="btn btn-register" id="registerBtn">Register</a>
 
             </div>
         </nav>

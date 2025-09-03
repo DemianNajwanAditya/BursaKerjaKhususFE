@@ -1,60 +1,65 @@
-<body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <!-- FORM LOGIN -->
+        <div class="form-box">
+            @if ($errors->any())
+                <div class="alert-error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
-    <h2>Login</h2>
+            <form action="{{ route('login') }}" method="POST">
+                @csrf
 
-    @if ($errors->any())
-        <div class="alert-error">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="password" placeholder="Password" id="password" required>
+                    <i class="fa fa-eye-slash" id="togglePassword"></i>
+                </div>
+
+                <div>
+                    <label>
+                        <input type="checkbox" name="remember"> Remember me
+                    </label>
+                </div>
+
+                <button type="submit">Login</button>
+            </form>
+
+            <div class="register-link">
+                <p>Belum punya akun? 
+                    <a href="{{ route('register') }}">Daftar sebagai Student</a>
+                </p>
+            </div>
+
+            @if(session('success'))
+                <div class="alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
         </div>
-    @endif
 
-    <!-- Container animasi Lottie -->
-    <div id="lottie-animation" style="width:250px; height:250px; margin:0 auto 20px;"></div>
-
-    <form action="{{ route('login') }}" method="POST">
-        @csrf
-
-        <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required>
-        </div>
-
-        <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" name="password" placeholder="Password" id="password" required>
-            <i class="fa fa-eye-slash" id="togglePassword"></i>
-        </div>
-        <div>
-            <label>
-                <input type="checkbox" name="remember"> Remember me
-            </label>
-        </div>
-
-        <button type="submit">Login</button>
-    </form>
-
-    <div style="margin-top: 20px; text-align: center;">
-        <p style="font-size: 14px; color: #666;">
-            Belum punya akun? 
-            <a href="{{ route('register') }}">
-                Daftar sebagai Student
-            </a>
-        </p>
-    </div>
-    
-    @if(session('success'))
-        <div class="alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-        <!-- ANIMASI -->
+        <!-- ANIMASI LOTTIE -->
         <div class="animation-box">
             <div id="lottie-animation"></div>
         </div>
