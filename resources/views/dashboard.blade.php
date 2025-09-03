@@ -68,13 +68,6 @@
             </div>
         </div>
 
-        <!-- Background Foto -->
-        <div class="dashboard-header-bg">
-            <div class="dashboard-header-bg" style="background-image: url('{{ asset('images/lapangan.jpeg') }}');">
-            <div class="overlay">
-            </div>
-        </div>
-
            <div>
                 <h2 class="section-title">LOWONGAN TERBARU</h2>
                 <div class="lowongan-grid">
@@ -237,3 +230,5 @@
   <div class="copyright">
     <p>2025 <strong>smkn4bdg.sch.id</strong> All Rights Reserved</p>
   </div>
+
+   <script src="{{ asset('js/dashboard.js') }}"></script>

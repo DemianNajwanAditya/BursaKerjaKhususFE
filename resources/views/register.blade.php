@@ -93,5 +93,3 @@
 @section('js')
 <script src="{{ asset('js/register-student.js') }}"></script>
 @endsection
-
-<p></p>
