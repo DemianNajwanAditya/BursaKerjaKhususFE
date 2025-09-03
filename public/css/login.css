@@ -426,8 +426,8 @@ a:focus {
 /* Wrapper untuk form + animasi */
 .login-wrapper {
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: center;
+    align-items: center;
     gap: 60px;
     flex-wrap: wrap; /* biar tetap responsif */
 }
@@ -435,20 +435,36 @@ a:focus {
 /* form tetap di kiri */
 .form-box {
     flex: 1;
-    max-width: 400px;
-    min-width: 320px;
+    max-width: 700px;
+    min-width: 200px;
 }
 
 /* animasi di kanan */
 .animation-box {
     flex: 1;
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: center;
+    align-items: center;
     min-width: 300px;
 }
 
 #lottie-animation {
     width: 100%;
     max-width: 400px;
+}
+
+.register-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }
