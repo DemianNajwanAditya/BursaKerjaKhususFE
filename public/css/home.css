@@ -29,12 +29,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; 
 }
 
 .logo {
+    display: flex;
     font-size: 2rem;
     font-weight: bold;
     background: linear-gradient(135deg, #1e3a8a, #3b82f6, #60a5fa);
@@ -271,12 +272,39 @@ body {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(3, 1fr));
+    gap: 1.5rem;
     margin-top: 3rem;
+    justify-items: center; /* biar center */
 }
 
+/* Baris pertama: 2 kartu */
+.features-grid .feature-card:nth-child(1) {
+    grid-column: 1 / 2; /* kiri */
+}
+.features-grid .feature-card:nth-child(2) {
+    grid-column: 3 / 4; /* kanan */
+}
+
+/* Baris kedua: biarin normal dulu */
+.features-grid .feature-card:nth-child(3),
+.features-grid .feature-card:nth-child(4),
+.features-grid .feature-card:nth-child(5) {
+    grid-column: auto;
+    z-index: 2;
+}
+
+/* Kartu tengah (nomor 4) biar naik + lebih besar */
+.features-grid .feature-card:nth-child(4) {
+    transform: translateY(-150px); /* naik ke atas */
+    scale: 1.2; /* lebih besar sedikit */
+    z-index: 2; /* biar kelihatan di depan */
+}
+
+
 .feature-card {
+    width: 280px;   /* lebih besar */
+    height: 300px;  /* lebih tinggi */
     background: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 20px;

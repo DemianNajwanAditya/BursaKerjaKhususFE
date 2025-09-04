@@ -10,10 +10,15 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-            <div class="logo">BKK Opat</div>
+             <div class="logo">
+            <span>BKK Opat</span>
+          </div>
+
             <div class="auth-buttons">
                 <a href="{{ route('login') }}" class="btn btn-login" id="loginBtn">Login</a>
                 <a href="{{ route('register') }}" class="btn btn-register" id="registerBtn">Register</a>
+            </div>
+
 
             </div>
         </nav>
@@ -41,13 +46,6 @@
         <div class="features-container">
             <h2>Tim BKK</h2>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="foto">
-                        <img src="{{ asset('images/foto-default.png') }}" alt="Default">
-                    </div>
-                    <h3>Nama Staff</h3>
-                    <p>Staff BKK</p>
-                </div>
                 <div class="feature-card">
                     <div class="foto">
                         <img src="{{ asset('images/foto-default.png') }}" alt="Default">
